@@ -1,0 +1,243 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Pizzeria Management Application" Height="800" Width="1500">
+    <!-- Définition de la grille -->
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <!-- Définition des bordures et des titres-->
+        <Border BorderBrush="Black" BorderThickness="1,1,0,1" Grid.Column="0" Grid.RowSpan="3"/>
+        <Border BorderBrush="Black" BorderThickness="1,1,0,1" Grid.Column="1" Grid.RowSpan="3"/>
+        <Border BorderBrush="Black" BorderThickness="1,1,0,1" Grid.Column="2" Grid.RowSpan="3"/>
+        <Border BorderBrush="Black" BorderThickness="1,1,0,1" Grid.Column="3" Grid.RowSpan="3"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="4" Grid.RowSpan="3"/>
+
+        <Label>Workforce Module</Label>
+        <Label Grid.Column="1">Orders Module</Label>
+        <Label Grid.Column="2">Statistics Module</Label>
+        <Label Grid.Column="3">Communication Module</Label>
+        <Label Grid.Column="4">Other Module</Label>
+        
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1" Grid.ColumnSpan="5"/>
+        
+        <!-- Workforce Module -->
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+        
+        <StackPanel Grid.Row="1" Visibility="Visible" Name="Panel1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Text="Customers" Margin="5,3,0,0"/>
+                    <ListBox Height="150" Width="85" Margin="5" x:Name="lstCustomer" SelectionMode="Single" SelectionChanged="SelectionChanged1"/>
+                    <Button Content="Add" Click="affCustomerClick" Margin="5" BorderBrush="LimeGreen" x:Name="Add1"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Text="Clerks" Margin="5,3,0,0"/>
+                    <ListBox Height="150" Width="85" Margin="5" x:Name="lstClerk" SelectionMode="Single" SelectionChanged="SelectionChanged2"/>
+                    <Button Content="Add" Click="affClerkClick" Margin="5" BorderBrush="LimeGreen" x:Name="Add2"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Text="Deliverers" Margin="5,3,0,0"/>
+                    <ListBox Height="150" Width="85" Margin="5" x:Name="lstDeliverer" SelectionMode="Single" SelectionChanged="SelectionChanged3"/>
+                    <Button Content="Add" Click="affDelivererClick" Margin="5" BorderBrush="LimeGreen" x:Name="Add3"/>
+                </StackPanel>
+            </StackPanel>
+            <Button Content="Modify" Click="affCustomerClick" Margin="5" BorderBrush="DarkOrange" Visibility="Collapsed" x:Name="Modify1" Width="200"/>
+            <Button Content="Delete" Click="deleteCustomer" Margin="5" BorderBrush="Red" Visibility="Collapsed" x:Name="Delete1" Width="200"/>
+            <Button Content="Modify" Click="affClerkClick" Margin="5" BorderBrush="DarkOrange" Visibility="Collapsed" x:Name="Modify2" Width="200"/>
+            <Button Content="Delete" Click="deleteClerk" Margin="5" BorderBrush="Red" Visibility="Collapsed" x:Name="Delete2" Width="200"/>
+            <Button Content="Modify" Click="affDelivererClick" Margin="5" BorderBrush="DarkOrange" Visibility="Collapsed" x:Name="Modify3" Width="200"/>
+            <Button Content="Delete" Click="deleteDeliverer" Margin="5" BorderBrush="Red" Visibility="Collapsed" x:Name="Delete3" Width="200"/>
+            <Button Content="Order by alphabetical order" Margin="5,15,5,5" Click="OrderAlpha" Width="200"/>
+            <Button Content="Order by city" Margin="5" Click="OrderCity" Width="200"/>
+            <Button Content="Order by most orders" Margin="5" Click="OrderByOrder" Width="200"/>
+            <Button Content="Find a specific customer" Margin="5,15" Click="findCustomer" Width="200" BorderBrush="Goldenrod" Height="30"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Name="Panel2" Visibility="Collapsed">
+            <TextBlock Text="Add a new customer" Margin="5,5,5,10" FontSize="15" x:Name="AddCustomerTitle" Visibility="Collapsed">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <TextBlock Text="Modify a customer" Margin="5,5,5,10" FontSize="15" x:Name="ModifyCustomerTitle" Visibility="Collapsed">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Name*" Margin="5"/>
+                <TextBox Grid.Row="1" x:Name="nameCustomer" Margin="5"/>
+                <TextBlock Grid.Column="1" Text="Surname*" Margin="5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="surnameCustomer" Margin="5"/>
+                <TextBlock Grid.Row="2" Text="Phone Number*" Margin="5"/>
+                <TextBox Grid.Row="3" Grid.ColumnSpan="2" x:Name="phoneCustomer" Margin="5" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBlock Grid.Row="4" Text="Address" Margin="5">
+                    <TextBlock.TextDecorations>
+                        <TextDecoration Location="Underline"/>
+                    </TextBlock.TextDecorations>
+                </TextBlock>
+                <TextBlock Grid.Row="5" Text="City*" Margin="5"/>
+                <TextBox Grid.Row="6" x:Name="cityCustomer" Margin="5"/>
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="Postcode*" Margin="5"/>
+                <TextBox Grid.Row="6" Grid.Column="1" x:Name="postcodeCustomer" Margin="5" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBlock Grid.Row="7" Text="Street*" Margin="5"/>
+                <TextBox Grid.Row="8" x:Name="streetCustomer" Margin="5"/>
+                <TextBlock Grid.Column="1" Grid.Row="7" Text="Street number*" Margin="5"/>
+                <TextBox Grid.Row="8" Grid.Column="1" x:Name="numberCustomer" Margin="5" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBlock Grid.Row="9" Text="Floor" Margin="5"/>
+                <TextBox Grid.Row="10" x:Name="floorCustomer" Margin="5" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBlock Grid.Column="1" Grid.Row="9" Text="Apartment" Margin="5"/>
+                <TextBox Grid.Row="10" Grid.Column="1" x:Name="apartmentCustomer" Margin="5"/>
+                <TextBlock Grid.Row="11" Text="All * field must be filled" Margin="5,15,5,5"/>
+                <Button Grid.Row="12" Content="Add" Margin="10,5" Click="addCustomerClick" x:Name="addCustomerButton" Visibility="Collapsed"/>
+                <Button Grid.Row="12" Content="Modify" Margin="10,5" Click="addCustomerClick" x:Name="modifyCustomerButton" Visibility="Collapsed"/>
+                <Button Grid.Row="12" Grid.Column="1" Content="Cancel" Margin="10,5" Click="cancelClick"/>
+            </Grid>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Name="Panel3" Visibility="Collapsed">
+            <TextBlock Text="Add a new clerk" Margin="5,5,5,10" FontSize="15" Visibility="Collapsed" x:Name="AddClerkTitle">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <TextBlock Text="Modify a clerk" Margin="5,5,5,10" FontSize="15" Visibility="Collapsed" x:Name="ModifyClerkTitle">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <TextBlock Text="Add a new deliverer" Margin="5,5,5,10" FontSize="15" Visibility="Collapsed" x:Name="AddDelivererTitle">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <TextBlock Text="Modify a deliverer" Margin="5,5,5,10" FontSize="15" Visibility="Collapsed" x:Name="ModifyDelivererTitle">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Name" Margin="5"/>
+                <TextBox Grid.Row="1" x:Name="name" Margin="5"/>
+                <TextBlock Grid.Column="1" Text="Surname" Margin="5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="surname" Margin="5"/>
+                <Button Grid.Row="2" Content="Add" Margin="10,5" Click="addClerkClick" x:Name="addClerkButton" Visibility="Collapsed"/>
+                <Button Grid.Row="2" Content="Modify" Margin="10,5" Click="addClerkClick" x:Name="modifyClerkButton" Visibility="Collapsed"/>
+                <Button Grid.Row="2" Content="Add" Margin="10,5" Click="addDelivererClick" x:Name="addDelivererButton" Visibility="Collapsed"/>
+                <Button Grid.Row="2" Content="Modify" Margin="10,5" Click="addDelivererClick" x:Name="modifyDelivererButton" Visibility="Collapsed"/>
+                <Button Grid.Row="2" Grid.Column="1" Content="Cancel" Margin="10,5" Click="cancelClick"/>
+            </Grid>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Name="findCustomerPanel" Visibility="Collapsed">
+            <TextBlock Text="Find a customer" Margin="5,5,5,10" FontSize="15">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+            
+                <TextBlock Text="Enter a phone number:" Margin="5"/>
+                <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="phoneFindCustomer" Margin="5" PreviewTextInput="NumberValidationTextBox"/>
+                <Button Grid.Row="2" Content="Find" Margin="10,15" Click="findCustomerClick"/>
+                <Button Grid.Row="2" Grid.Column="1" Content="Close" Margin="10,15" Click="cancelClick"/>
+                <TextBlock Grid.Row="3" Text="No customer was found" Visibility="Collapsed" x:Name="noMatch" Margin="5,0,5,15"/>
+            </Grid>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Name="InfoPanel" Visibility="Collapsed">
+            <TextBlock Text="Informations" Margin="5,5,5,10" FontSize="15">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="NameInfo" Margin="5"/>
+                <TextBlock Grid.Column="1" x:Name="SurnameInfo" Margin="5"/>
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" x:Name="PhoneInfo" Margin="5"/>
+                <TextBlock Grid.Row="1" x:Name="IdInfo" Margin="5"/>
+                <TextBlock Grid.Row="2" x:Name="FirstOrderInfo" Margin="5"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="NumOrderInfo" Margin="5"/>
+                <TextBlock Grid.Row="3" Text="Address Info:" Margin="5" Visibility="Collapsed" x:Name="AddressInfo">
+                    <TextBlock.TextDecorations>
+                        <TextDecoration Location="Underline"/>
+                    </TextBlock.TextDecorations>
+                </TextBlock>
+                <TextBlock Grid.Row="4" x:Name="CityInfo" Margin="5"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" x:Name="PostcodeInfo" Margin="5"/>
+                <TextBlock Grid.Row="5" x:Name="StreetInfo" Margin="5"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" x:Name="NumberInfo" Margin="5"/>
+                <TextBlock Grid.Row="6" x:Name="FloorInfo" Margin="5"/>
+                <TextBlock Grid.Row="6" Grid.Column="1" x:Name="ApartmentInfo" Margin="5"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
