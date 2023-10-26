@@ -24,12 +24,6 @@ namespace WpfApp1
 
         //Workforce module
 
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
         private void affCustomerClick(object sender, RoutedEventArgs e)
         {
             Panel1.Visibility = Visibility.Collapsed;
