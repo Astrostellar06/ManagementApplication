@@ -39,3 +39,6 @@ C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\Wpf
 C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.pdb
 C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.genruntimeconfig.cache
 C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\ref\WpfApp1.dll
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WorkforceModule.g.cs
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WorkforceModule.baml
