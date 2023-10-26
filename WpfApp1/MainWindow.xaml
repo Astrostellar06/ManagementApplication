@@ -239,5 +239,70 @@
                 <TextBlock Grid.Row="6" Grid.Column="1" x:Name="ApartmentInfo" Margin="5"/>
             </Grid>
         </StackPanel>
+        
+        <!--Orders Module-->
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="OrderPanel">
+            <TextBlock Text="Place an order" Margin="5,5,5,10" FontSize="15">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="Customer Phone Number:" Margin="5,0"/>
+                <TextBox Grid.Row="1" x:Name="phoneOrder" Margin="5" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBlock Grid.Row="2" Text="Clerk Number:" Margin="5"/>
+                <TextBox Grid.Row="3" x:Name="OrderClerk"  Margin="5" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBlock Grid.Row="4" Margin="5" Text="Add pizza(s)"/>
+                <Grid Grid.Row="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <ComboBox x:Name="PizzaList" Margin="5">
+                        <ComboBoxItem Content="Choose the type" IsSelected="True" Visibility="Collapsed"/>
+                        <ComboBoxItem Content="Margherita"/>
+                        <ComboBoxItem Content="Pepperoni"/>
+                        <ComboBoxItem Content="Regina"/>
+                        <ComboBoxItem Content="Napoletana"/>
+                        <ComboBoxItem Content="Calzone"/>
+                        <ComboBoxItem Content="Hawaiian"/>
+                        <ComboBoxItem Content="Vegetarian"/>
+                        <ComboBoxItem Content="Vegan"/>
+                        <ComboBoxItem Content="Sicilian"/>
+                        <ComboBoxItem Content="Tartiflette"/>
+                        <ComboBoxItem Content="Chorizo"/>
+                        <ComboBoxItem Content="Salmon"/>
+                    </ComboBox>
+                    
+                    <ComboBox Grid.Column="1" x:Name="SizeList" Margin="5">
+                        <ComboBoxItem Content="Choose the size" IsSelected="true" Visibility="Collapsed"/>
+                        <ComboBoxItem Content="Small"/>
+                        <ComboBoxItem Content="Medium"/>
+                        <ComboBoxItem Content="Large"/>
+                    </ComboBox>
+                    
+                    <Button Grid.Row="1" Grid.ColumnSpan="2" Width="100" BorderBrush="LimeGreen" Content="Add" Margin="5"/>
+                </Grid>
+                
+                
+            </Grid>
+        </StackPanel>
+        
     </Grid>
 </Window>

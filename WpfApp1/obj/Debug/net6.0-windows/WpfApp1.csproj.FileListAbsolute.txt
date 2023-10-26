@@ -19,3 +19,23 @@ C:\Users\User\Documents\Efrei\M1\intégration de systèmes\WpfApp1\WpfApp1\obj\D
 C:\Users\User\Documents\Efrei\M1\intégration de systèmes\WpfApp1\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.pdb
 C:\Users\User\Documents\Efrei\M1\intégration de systèmes\WpfApp1\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.genruntimeconfig.cache
 C:\Users\User\Documents\Efrei\M1\intégration de systèmes\WpfApp1\WpfApp1\obj\Debug\net6.0-windows\ref\WpfApp1.dll
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\bin\Debug\net6.0-windows\WpfApp1.exe
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\bin\Debug\net6.0-windows\WpfApp1.deps.json
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\bin\Debug\net6.0-windows\WpfApp1.runtimeconfig.json
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\bin\Debug\net6.0-windows\WpfApp1.dll
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\bin\Debug\net6.0-windows\WpfApp1.pdb
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1_MarkupCompile.cache
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1_MarkupCompile.lref
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.g.resources
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.AssemblyInfoInputs.cache
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.AssemblyInfo.cs
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.csproj.CoreCompileInputs.cache
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.dll
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\refint\WpfApp1.dll
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.pdb
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\WpfApp1.genruntimeconfig.cache
+C:\Users\cleme\OneDrive\Documents\Efrei\M1\Integration\ManagementApplication\WpfApp1\obj\Debug\net6.0-windows\ref\WpfApp1.dll
