@@ -268,13 +268,17 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 
                 <TextBlock Text="Customer Phone Number:" Margin="5,0"/>
                 <TextBox Grid.Row="1" x:Name="phoneOrder" Margin="5" PreviewTextInput="NumberValidationTextBox"/>
                 <TextBlock Grid.Row="2" Text="Clerk Number:" Margin="5"/>
-                <TextBox Grid.Row="3" x:Name="OrderClerk"  Margin="5" PreviewTextInput="NumberValidationTextBox"/>
-                <TextBlock Grid.Row="4" Margin="5" Text="Add pizza(s)"/>
+                <TextBox Grid.Row="3" x:Name="orderClerk"  Margin="5,5,5,10" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBlock Grid.Row="4" Margin="5,15,5,5" Text="Add pizza(s)"/>
+                <Border Grid.Row="4" BorderBrush="Black" Margin="0,5,0,0" BorderThickness="0,1,0,0"/>
                 <Grid Grid.Row="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -308,13 +312,15 @@
                         <ComboBoxItem Content="Large"/>
                     </ComboBox>
                     
-                    <Button Grid.Row="1" Grid.ColumnSpan="2" Width="100" BorderBrush="LimeGreen" Content="Add" Margin="5" Click="AddPizza"/>
+                    <Button Grid.Row="1" Grid.ColumnSpan="2" Width="100" BorderBrush="LimeGreen" Content="Add" Margin="5,5,5,10" Click="AddPizza"/>
                 </Grid>
                 
                 <TextBlock Grid.Row="6" Text="List of pizzas:" Margin="5" Visibility="Collapsed" x:Name="PizzaOrderListLabel"/>
-                <ListBox Grid.Row="7" x:Name="PizzaOrderList" Margin="5" Visibility="Collapsed" MaxHeight="400"/>
-                <TextBlock Grid.Row="8" Text="Add drink(s) (optional)" Margin="5,10,5,5"/>
-                <Grid Grid.Row="9">
+                <ListBox Grid.Row="7" x:Name="PizzaOrderList" Margin="5" Visibility="Collapsed" MaxHeight="400" SelectionMode="Single" SelectionChanged="SelectionChanged4"/>
+                <Button Grid.Row="8" x:Name="DeletePizza" Margin="5" Content="Delete" Visibility="Collapsed" Click="DeletePizzaClick" BorderBrush="Red"/>
+                <TextBlock Grid.Row="9" Text="Add drink(s) (optional)" Margin="5,15,5,5"/>
+                <Border Grid.Row="9" BorderBrush="Black" Margin="0,5,0,0" BorderThickness="0,1,0,0"/>
+                <Grid Grid.Row="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -342,10 +348,12 @@
                     
                     <Button Grid.Row="1" Grid.ColumnSpan="2" Width="100" BorderBrush="LimeGreen" Content="Add" Margin="5" Click="AddDrink"/>
                 </Grid>
-                <TextBlock Grid.Row="10" Text="List of drinks:" Margin="5" Visibility="Collapsed" x:Name="DrinkOrderListLabel"/>
-                <ListBox Grid.Row="11" x:Name="DrinkOrderList" Margin="5" Visibility="Collapsed" MaxHeight="400"/>
-                <Button Grid.Row="12" Width="200" BorderBrush="LimeGreen" Content="Place Order" Margin="5,20"/>
-
+                <TextBlock Grid.Row="11" Text="List of drinks:" Margin="5" Visibility="Collapsed" x:Name="DrinkOrderListLabel"/>
+                <ListBox Grid.Row="12" x:Name="DrinkOrderList" Margin="5,5,5,0" Visibility="Collapsed" MaxHeight="400" SelectionMode="Single" SelectionChanged="SelectionChanged5"/>
+                <Button Grid.Row="13" x:Name="DeleteDrink" Margin="5,10,5,0" Content="Delete" Visibility="Collapsed" Click="DeleteDrinkClick" BorderBrush="Red"/>
+                <Border Grid.Row="14" BorderBrush="Black" Margin="0,10" BorderThickness="0,1,0,0"/>
+                <Button Grid.Row="14" Width="200" BorderBrush="LimeGreen" Content="Place Order" Margin="5,25,5,20" Click="PlaceOrder"/>
+                <Button Grid.Row="15" Width="200" BorderBrush="Red" Content="Cancel" Margin="5,0,5,20" Click="CancelOrder"/>
             </Grid>
         </StackPanel>
         

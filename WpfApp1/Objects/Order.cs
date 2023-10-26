@@ -13,20 +13,22 @@ public class Order
     public string customerName { get; set; }
     public string clerkName { get; set; }
     public Address address { get; set; }
+    private static int counter;
     
-    public Order(List<Pizza> pizzas, List<Drink> drinks, int orderNumber, DateTime orderTime, DateTime orderDate, string customerName, string clerkName, Address address)
+    public Order(List<Pizza> pizzas, List<Drink> drinks, string customerName, string clerkName, Address address)
     {
         this.pizzas = pizzas;
         this.drinks = drinks;
-        this.orderNumber = orderNumber;
-        this.orderTime = orderTime;
-        this.orderDate = orderDate;
+        orderNumber = counter;
+        orderTime = DateTime.Now;
+        orderDate = DateTime.Today;
         this.customerName = customerName;
         this.clerkName = clerkName;
         this.address = address;
+        counter++;
     }
     
-    public Order(List<Pizza> pizzas, int orderNumber, DateTime orderTime, DateTime orderDate, string customerName, string clerkName, Address address)
+    public Order(List<Pizza> pizzas, string customerName, string clerkName, Address address)
     {
         this.pizzas = pizzas;
         this.orderNumber = orderNumber;
