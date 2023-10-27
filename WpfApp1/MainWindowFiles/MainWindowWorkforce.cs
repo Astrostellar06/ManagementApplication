@@ -130,16 +130,32 @@ namespace WpfApp1
                     listCustomers[lstCustomer.SelectedIndex] = customerToModify;
                     lstCustomer.Items[lstCustomer.SelectedIndex] =
                         customerToModify.name + " " + customerToModify.surname;
-                    Console.Write(lstCustomer.SelectedIndex);
+                    clear();
                 }
                 else
                 {
-                    listCustomers.Add(
-                        new Customer(nameCustomer.Text, surnameCustomer.Text, address, phoneCustomer.Text));
-                    lstCustomer.Items.Add(nameCustomer.Text + " " + surnameCustomer.Text);
-                }
+                    bool exist = false;
+                    foreach (Customer customer in listCustomers)
+                    {
+                        if (customer.phone == phoneCustomer.Text)
+                        {
+                            exist = true;
+                            break;
+                        }
+                    }
 
-                clear();
+                    if (exist)
+                    {
+                        MessageBox.Show("This phone number already exists");
+                    }
+                    else
+                    {
+                        listCustomers.Add(new Customer(nameCustomer.Text, surnameCustomer.Text, address,
+                            phoneCustomer.Text));
+                        lstCustomer.Items.Add(nameCustomer.Text + " " + surnameCustomer.Text);
+                        clear();
+                    }
+                }
             }
         }
 
