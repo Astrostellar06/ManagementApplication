@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,7 +53,7 @@ namespace WpfApp1
                 Drink.Size size = (Drink.Size)Enum.Parse(typeof(Drink.Size), selectedDrinkSize.Content.ToString());
                 Drink drink = new Drink(type, size);
                 drinks.Add(drink);
-                DrinkOrderList.Items.Add(selectedDrink.Content);
+                DrinkOrderList.Items.Add(selectedDrinkSize.Content + " of " + selectedDrink.Content);
                 DrinkOrderList.Visibility = Visibility.Visible;
                 DrinkOrderListLabel.Visibility = Visibility.Visible;
             }
@@ -84,30 +85,63 @@ namespace WpfApp1
                     MessageBox.Show("Clerk not found.");
                     return;
                 }
+
                 if (drinks.Count == 0)
-                    orders.Add(new Order(pizzas, listCustomers[customerIndex].name, listClerks[clerkIndex].name, listCustomers[customerIndex].address));
+                {
+                    if (sender.Equals(PlaceOrderButton))
+                    {
+                        MessageBox.Show(pizzas.Count.ToString());
+                        orders.Add(new Order(new List<Pizza>(pizzas), listCustomers[customerIndex], listClerks[clerkIndex]));
+                        MessageBox.Show(orders[orders.Count-1].pizzas.Count.ToString());
+                        CurrentOrderList.Items.Add("Order #" + orders[orders.Count - 1].orderNumber + " - Price: " + orders[orders.Count - 1].calculateTotalPrice());
+                        MessageBox.Show("Your order has been placed.");
+                    }
+                    else
+                    {
+                        MessageBox.Show(pizzas.Count.ToString());
+                        Order order = orders[CurrentOrderList.SelectedIndex];
+                        order.pizzas = new List<Pizza>(pizzas);
+                        order.customer = listCustomers[customerIndex];
+                        order.clerk = listClerks[clerkIndex];
+                        orders[CurrentOrderList.SelectedIndex] = order;
+                        CurrentOrderList.Items[CurrentOrderList.SelectedIndex] = ("Order #" + order.orderNumber + " - Price: " + order.calculateTotalPrice());
+                        MessageBox.Show("Your order has been modified.");
+                    }
+                }
                 else
-                    orders.Add(new Order(pizzas, drinks, listCustomers[customerIndex].name, listClerks[clerkIndex].name, listCustomers[customerIndex].address));
-                pizzas.Clear();
-                drinks.Clear();
-                PizzaOrderList.Items.Clear();
-                DrinkOrderList.Items.Clear();
-                PizzaOrderList.Visibility = Visibility.Collapsed;
-                DrinkOrderList.Visibility = Visibility.Collapsed;
-                PizzaOrderListLabel.Visibility = Visibility.Collapsed;
-                DrinkOrderListLabel.Visibility = Visibility.Collapsed;
-                MessageBox.Show("Your order has been placed.");
+                {
+                    if (sender.Equals(PlaceOrderButton))
+                    {
+                        orders.Add(new Order(new List<Pizza>(pizzas), new List<Drink>(drinks), listCustomers[customerIndex], listClerks[clerkIndex]));
+                        CurrentOrderList.Items.Add("Order #" + orders[orders.Count - 1].orderNumber + " - Price: " + orders[orders.Count - 1].calculateTotalPrice());
+                        MessageBox.Show("Your order has been placed.");
+                    }
+                    else
+                    {
+                        Order order = orders[CurrentOrderList.SelectedIndex];
+                        order.pizzas = new List<Pizza>(pizzas);
+                        order.drinks = new List<Drink>(drinks);
+                        order.customer = listCustomers[customerIndex];
+                        order.clerk = listClerks[clerkIndex];
+                        orders[CurrentOrderList.SelectedIndex] = order;
+                        CurrentOrderList.Items[CurrentOrderList.SelectedIndex] = ("Order #" + order.orderNumber + " - Price: " + order.calculateTotalPrice());
+                        MessageBox.Show("Your order has been modified.");
+                    }
+                }
+                Clear();
+                MessageBox.Show(orders[orders.Count-1].pizzas.Count.ToString());
             }
         }
 
-        private void SelectionChanged4(object sender, RoutedEventArgs e)
+        private void SelectionChanged(object sender, RoutedEventArgs e)
         {
-            DeletePizza.Visibility = Visibility.Visible;
-        }
-        
-        private void SelectionChanged5(object sender, RoutedEventArgs e)
-        {
-            DeleteDrink.Visibility = Visibility.Visible;
+            if (sender.Equals(PizzaOrderList))
+                DeletePizza.Visibility = Visibility.Visible;
+            else if (sender.Equals(DrinkOrderList))
+                DeleteDrink.Visibility = Visibility.Visible;
+            else if (sender.Equals(CurrentOrderList))
+                ModifyButton.Visibility = Visibility.Visible;
+                
         }
 
         private void DeletePizzaClick(object sender, RoutedEventArgs e)
@@ -134,7 +168,12 @@ namespace WpfApp1
             DeleteDrink.Visibility = Visibility.Collapsed;
         }
 
-        private void CancelOrder(object Sender, RoutedEventArgs e)
+        private void CancelOrder(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        private void Clear()
         {
             pizzas.Clear();
             drinks.Clear();
@@ -144,6 +183,54 @@ namespace WpfApp1
             DrinkOrderList.Visibility = Visibility.Collapsed;
             PizzaOrderListLabel.Visibility = Visibility.Collapsed;
             DrinkOrderListLabel.Visibility = Visibility.Collapsed;
+            OrderPanel.Visibility = Visibility.Collapsed;
+            OrderListPanel.Visibility = Visibility.Visible;
+            phoneOrder.Text = "";
+            orderClerk.Text = "";
+            PizzaList.SelectedIndex = 0;
+            PizzaSizeList.SelectedIndex = 0;
+            DrinkList.SelectedIndex = 0;
+            DrinkSizeList.SelectedIndex = 0;
+            ModifyButton.Visibility = Visibility.Collapsed;
+            CurrentOrderList.SelectedIndex = -1;
+            DeletePizza.Visibility = Visibility.Collapsed;
+            DeleteDrink.Visibility = Visibility.Collapsed;
+            ModifyOrderButton.Visibility = Visibility.Collapsed;
+            PlaceOrderButton.Visibility = Visibility.Collapsed;
+            ModifyButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void AddOrder(object sender, RoutedEventArgs e)
+        {
+            OrderListPanel.Visibility = Visibility.Collapsed;
+            OrderPanel.Visibility = Visibility.Visible;
+            if (sender.Equals(ModifyButton))
+            {
+                Order order = orders[CurrentOrderList.SelectedIndex];
+                ModifyOrderButton.Visibility = Visibility.Visible;
+                MessageBox.Show(order.pizzas.Count.ToString());
+                for (int i = 0 ; i < order.pizzas.Count ; i++)
+                {
+                    PizzaOrderList.Items.Add(order.pizzas[i].size + " " + order.pizzas[i].type);
+                    PizzaOrderList.Visibility = Visibility.Visible;
+                    PizzaOrderListLabel.Visibility = Visibility.Visible;
+                }
+                for (int i = 0 ; i < order.drinks.Count ; i++)
+                {
+                    DrinkOrderList.Items.Add(order.drinks[i].volume + " of " + order.drinks[i].type);
+                    DrinkOrderList.Visibility = Visibility.Visible;
+                    DrinkOrderListLabel.Visibility = Visibility.Visible;
+                }
+                phoneOrder.Text = order.customer.phone;
+                orderClerk.Text = order.clerk.id.ToString();
+                pizzas = new List<Pizza>(order.pizzas);
+                if (order.drinks.Count > 0)
+                    drinks = new List<Drink>(order.drinks);
+            }
+            else
+            {
+                PlaceOrderButton.Visibility = Visibility.Visible;
+            }
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Pizzeria Management Application" Height="800" Width="1500">
+        Title="Pizzeria Management Application" Height="1000" Width="1500">
     <!-- Définition de la grille -->
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -244,9 +244,27 @@
                 </Grid>
             </StackPanel>
         </Grid>
+        
         <!--Orders Module-->
         
-        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="OrderPanel">
+        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="OrderListPanel" Margin="5">
+            <TextBlock Text="List of current orders" FontSize="15" Margin="5,0">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <ListBox Height="200" Margin="10" SelectionMode="Single" x:Name="CurrentOrderList" SelectionChanged="SelectionChanged"/>
+            <Button Content="Modify" Width="200" BorderBrush="Goldenrod" Margin="0,5" x:Name="ModifyButton" Click="AddOrder" Visibility="Collapsed"/>
+            <Button Content="Add an order" Width="200" BorderBrush="LimeGreen" Margin="0,10,0,30" Click="AddOrder"/>
+            <TextBlock Text="List of past orders" FontSize="15" Margin="5,0">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <ListBox Height="200" Margin="10" SelectionMode="Single"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="OrderPanel" Visibility="Collapsed">
             <TextBlock Text="Place an order" Margin="5,5,5,10" FontSize="15">
                 <TextBlock.TextDecorations>
                     <TextDecoration Location="Underline"/>
@@ -316,7 +334,7 @@
                 </Grid>
                 
                 <TextBlock Grid.Row="6" Text="List of pizzas:" Margin="5" Visibility="Collapsed" x:Name="PizzaOrderListLabel"/>
-                <ListBox Grid.Row="7" x:Name="PizzaOrderList" Margin="5" Visibility="Collapsed" MaxHeight="400" SelectionMode="Single" SelectionChanged="SelectionChanged4"/>
+                <ListBox Grid.Row="7" x:Name="PizzaOrderList" Margin="5" Visibility="Collapsed" MaxHeight="100" SelectionMode="Single" SelectionChanged="SelectionChanged"/>
                 <Button Grid.Row="8" x:Name="DeletePizza" Margin="5" Content="Delete" Visibility="Collapsed" Click="DeletePizzaClick" BorderBrush="Red"/>
                 <TextBlock Grid.Row="9" Text="Add drink(s) (optional)" Margin="5,15,5,5"/>
                 <Border Grid.Row="9" BorderBrush="Black" Margin="0,5,0,0" BorderThickness="0,1,0,0"/>
@@ -349,10 +367,11 @@
                     <Button Grid.Row="1" Grid.ColumnSpan="2" Width="100" BorderBrush="LimeGreen" Content="Add" Margin="5" Click="AddDrink"/>
                 </Grid>
                 <TextBlock Grid.Row="11" Text="List of drinks:" Margin="5" Visibility="Collapsed" x:Name="DrinkOrderListLabel"/>
-                <ListBox Grid.Row="12" x:Name="DrinkOrderList" Margin="5,5,5,0" Visibility="Collapsed" MaxHeight="400" SelectionMode="Single" SelectionChanged="SelectionChanged5"/>
+                <ListBox Grid.Row="12" x:Name="DrinkOrderList" Margin="5,5,5,0" Visibility="Collapsed" MaxHeight="100" SelectionMode="Single" SelectionChanged="SelectionChanged"/>
                 <Button Grid.Row="13" x:Name="DeleteDrink" Margin="5,10,5,0" Content="Delete" Visibility="Collapsed" Click="DeleteDrinkClick" BorderBrush="Red"/>
                 <Border Grid.Row="14" BorderBrush="Black" Margin="0,10" BorderThickness="0,1,0,0"/>
-                <Button Grid.Row="14" Width="200" BorderBrush="LimeGreen" Content="Place Order" Margin="5,25,5,20" Click="PlaceOrder"/>
+                <Button Grid.Row="14" Width="200" BorderBrush="LimeGreen" Content="Place Order" Margin="5,25,5,20" Click="PlaceOrder" Visibility="Collapsed" x:Name="PlaceOrderButton"/>
+                <Button Grid.Row="14" Width="200" BorderBrush="LimeGreen" Content="Modify" Margin="5,25,5,20" Click="PlaceOrder" Visibility="Collapsed" x:Name="ModifyOrderButton"/>
                 <Button Grid.Row="15" Width="200" BorderBrush="Red" Content="Cancel" Margin="5,0,5,20" Click="CancelOrder"/>
             </Grid>
         </StackPanel>

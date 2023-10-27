@@ -10,32 +10,44 @@ public class Order
     public int orderNumber { get; set; }
     public DateTime orderTime { get; set; }
     public DateTime orderDate { get; set; }
-    public string customerName { get; set; }
-    public string clerkName { get; set; }
-    public Address address { get; set; }
+    public Customer customer { get; set; }
+    public Clerk clerk { get; set; }
     private static int counter;
     
-    public Order(List<Pizza> pizzas, List<Drink> drinks, string customerName, string clerkName, Address address)
+    public Order(List<Pizza> pizzas, List<Drink> drinks, Customer customer, Clerk clerk)
     {
         this.pizzas = pizzas;
         this.drinks = drinks;
         orderNumber = counter;
         orderTime = DateTime.Now;
         orderDate = DateTime.Today;
-        this.customerName = customerName;
-        this.clerkName = clerkName;
-        this.address = address;
+        this.customer = customer;
+        this.clerk = clerk;
         counter++;
     }
     
-    public Order(List<Pizza> pizzas, string customerName, string clerkName, Address address)
+    public Order(List<Pizza> pizzas, Customer customer, Clerk clerk)
     {
         this.pizzas = pizzas;
-        this.orderNumber = orderNumber;
-        this.orderTime = orderTime;
-        this.orderDate = orderDate;
-        this.customerName = customerName;
-        this.clerkName = clerkName;
-        this.address = address;
+        orderNumber = counter;
+        orderTime = DateTime.Now;
+        orderDate = DateTime.Today;
+        this.customer = customer;
+        this.clerk = clerk;
+        counter++;
+    }
+    
+    public string calculateTotalPrice()
+    {
+        double totalPrice = 0;
+        foreach (Pizza pizza in pizzas)
+        {
+            totalPrice += pizza.calculatePrice();
+        }
+        foreach (Drink drink in drinks)
+        {
+            totalPrice += drink.calculatePrice();
+        }
+        return totalPrice.ToString();
     }
 }
