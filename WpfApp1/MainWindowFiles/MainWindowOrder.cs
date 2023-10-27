@@ -22,6 +22,8 @@ namespace WpfApp1
         List<Pizza> pizzas = new List<Pizza>();
         List<Drink> drinks = new List<Drink>();
         List<Order> orders = new List<Order>();
+        List<Order> deliveryOrders = new List<Order>();
+        List<Order> pastOrders = new List<Order>();
         
         private void AddPizza(object sender, RoutedEventArgs e)
         {
@@ -140,8 +142,15 @@ namespace WpfApp1
             else if (sender.Equals(DrinkOrderList))
                 DeleteDrink.Visibility = Visibility.Visible;
             else if (sender.Equals(CurrentOrderList))
+            {
                 ModifyButton.Visibility = Visibility.Visible;
-                
+                LossButton1.Visibility = Visibility.Visible;
+            }
+            else if (sender.Equals(DeliveryOrderList))
+            {
+                LossButton2.Visibility = Visibility.Visible;
+            }
+
         }
 
         private void DeletePizzaClick(object sender, RoutedEventArgs e)
@@ -198,6 +207,8 @@ namespace WpfApp1
             ModifyOrderButton.Visibility = Visibility.Collapsed;
             PlaceOrderButton.Visibility = Visibility.Collapsed;
             ModifyButton.Visibility = Visibility.Collapsed;
+            LossButton1.Visibility = Visibility.Collapsed;
+            LossButton2.Visibility = Visibility.Collapsed;
         }
 
         private void AddOrder(object sender, RoutedEventArgs e)
@@ -231,6 +242,28 @@ namespace WpfApp1
             {
                 PlaceOrderButton.Visibility = Visibility.Visible;
             }
+        }
+        
+        public void LossOrder(object sender, RoutedEventArgs e)
+        {
+            Order order;
+            if (sender.Equals(LossButton1))
+            {
+                order = orders[CurrentOrderList.SelectedIndex];
+                orders.RemoveAt(CurrentOrderList.SelectedIndex);
+                CurrentOrderList.Items.RemoveAt(CurrentOrderList.SelectedIndex);
+                ModifyButton.Visibility = Visibility.Collapsed;
+                LossButton1.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                order = deliveryOrders[DeliveryOrderList.SelectedIndex];
+                deliveryOrders.RemoveAt(DeliveryOrderList.SelectedIndex);
+                DeliveryOrderList.Items.RemoveAt(DeliveryOrderList.SelectedIndex);
+                LossButton2.Visibility = Visibility.Collapsed;
+            }
+            PastOrderList.Items.Add("Order #" + order.orderNumber + " - At loss");
+            pastOrders.Add(order);
         }
     }
 }
