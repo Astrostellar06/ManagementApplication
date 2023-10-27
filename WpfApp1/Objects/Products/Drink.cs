@@ -4,16 +4,24 @@ public class Drink : Products
 {
     public enum Type
     {
-        CocaCola,
+        Coke,
         Fanta,
         Sprite,
+        Orangina,
+        IceTea,
         Water
     }
     
-    private Type type { get; set; }
-    private int volume { get; set; }
+    public enum Size
+    {
+        Can,
+        Bottle
+    }
     
-    public Drink(Type type, int volume)
+    private Type type { get; set; }
+    private Size volume { get; set; }
+    
+    public Drink(Type type, Size volume)
     {
         this.type = type;
         this.volume = volume;

@@ -15,9 +15,16 @@ public class Pizza : Products
     {
         Margherita,
         Pepperoni,
+        Regina,
+        Napoletana,
+        Calzone,
         Hawaiian,
         Vegetarian,
-        Vegan
+        Vegan,
+        Sicilian,
+        Tartiflette,
+        Chorizo,
+        Salmon
     }
     private Size size { get; set; }
     private Type type { get; set; }
