@@ -33,6 +33,8 @@ namespace WpfApp1
                     PrepareOrder.Visibility = Visibility.Visible;
                     PrepareOrderList.Visibility = Visibility.Visible;
                     PrepareOrderList.Items.Clear();
+                    LossButton0.Visibility = Visibility.Collapsed;
+                    LossText.Visibility = Visibility.Collapsed;
                     isBusy = true;
                     orderBeingPrepared = orders[0];
                     orders.Remove(orderBeingPrepared);
@@ -54,6 +56,8 @@ namespace WpfApp1
                 isBusy = false;
                 PrepareOrder.Visibility = Visibility.Collapsed;
                 PrepareOrderList.Visibility = Visibility.Collapsed;
+                LossButton0.Visibility = Visibility.Collapsed;
+                LossText.Visibility = Visibility.Collapsed;
             }
         }
 

@@ -65,10 +65,11 @@ namespace WpfApp1
         {
             ClearStats();
             listStatsLabel.Text = "Average order price";
-            if (orders.Count + deliveryOrders.Count + pastOrders.Count == 0)
+            if (orders.Count + deliveryOrders.Count + pastOrders.Count == 0 && orderBeingPrepared == null)
                 AveragePrice.Text = "No orders in the database";
             else
             {
+                int orderPlusOne = 0;
                 double totalPrice = 0;
                 foreach (Order order in orders)
                 {
@@ -82,7 +83,14 @@ namespace WpfApp1
                 {
                     totalPrice += order.calculateTotalPrice();
                 }
-                AveragePrice.Text = "Average order price: " + (totalPrice / (orders.Count + deliveryOrders.Count + pastOrders.Count)) + "€";
+
+                if (!pastOrders.Contains(orderBeingPrepared) && !deliveryOrders.Contains(orderBeingPrepared) && orderBeingPrepared != null)
+                {
+                    orderPlusOne = 1;
+                    totalPrice += orderBeingPrepared.calculateTotalPrice();
+                }
+
+                AveragePrice.Text = "Average order price: " + String.Format("{0:0.00}", (totalPrice / (orders.Count + deliveryOrders.Count + pastOrders.Count + orderPlusOne))) + "€";
             }
             listStatsLabel.Visibility = Visibility.Visible;
             AveragePrice.Visibility = Visibility.Visible;
@@ -137,7 +145,7 @@ namespace WpfApp1
                 listStatsLabel.Text = "Orders by time period";
                 DateRange.Text = "Starting date: " + startDate.ToShortDateString() + "\nEnding date: " + endDate.ToShortDateString();
                 DateRange.Visibility = Visibility.Visible;
-                if (orders.Count + deliveryOrders.Count + pastOrders.Count == 0)
+                if (orders.Count + deliveryOrders.Count + pastOrders.Count == 0 && orderBeingPrepared == null)
                     listStats.Items.Add("No orders in the database");
                 else
                 {
@@ -174,6 +182,14 @@ namespace WpfApp1
                             string formattedString = originalStringLeft.PadRight(25, '.') + originalStringRight.PadLeft(25, '.');
                             listStats.Items.Add(formattedString);
                         }
+                    }
+                    if (!pastOrders.Contains(orderBeingPrepared) && !deliveryOrders.Contains(orderBeingPrepared) && orderBeingPrepared != null && orderBeingPrepared.orderDate >= startDate && orderBeingPrepared.orderDate <= endDate)
+                    {
+                        noOrders = false;
+                        string originalStringLeft = "Order number: " + orderBeingPrepared.orderNumber + " ";
+                        string originalStringRight = " Order date: " + orderBeingPrepared.orderDate.ToShortDateString();
+                        string formattedString = originalStringLeft.PadRight(25, '.') + originalStringRight.PadLeft(25, '.');
+                        listStats.Items.Add(formattedString);
                     }
                     if (noOrders)
                         listStats.Items.Add("No orders in the database for this time period");
