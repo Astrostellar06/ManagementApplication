@@ -248,7 +248,18 @@
         <!--Orders Module-->
         
         <StackPanel Grid.Row="1" Grid.Column="1" x:Name="OrderListPanel" Margin="5">
-            <TextBlock Text="List of orders in preparation" FontSize="15" Margin="5,0">
+            <TextBlock Text="Order being prepared" x:Name="PrepareOrder" FontSize="15" Margin="5,0" Visibility="Collapsed">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <ListBox Margin="10" SelectionMode="Single" x:Name="PrepareOrderList" SelectionChanged="SelectionChanged" Visibility="Collapsed"/>
+            <Button Content="At loss" Width="200" BorderBrush="Red" Margin="0,15,0,25" x:Name="LossButton0" Click="LossOrder" Visibility="Collapsed"/>
+            <StackPanel x:Name="LossText" Margin="0,15,0,25" Visibility="Collapsed" HorizontalAlignment="Center">
+                <TextBlock Text="Order already lost, will be added to closed orders" Foreground="Red"/>
+                <TextBlock Text="when the kitchen is done preparing" Foreground="Red"/>
+            </StackPanel>
+            <TextBlock Text="List of orders in waiting" FontSize="15" Margin="5,0">
                 <TextBlock.TextDecorations>
                     <TextDecoration Location="Underline"/>
                 </TextBlock.TextDecorations>
