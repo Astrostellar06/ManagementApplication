@@ -440,23 +440,37 @@
         
         <!--Communication Module-->
         
-        <Grid Grid.Row="1" Grid.Column="3" Margin="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="3" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="Kitchen" FontSize="15" Margin="5,0">
+                    <TextBlock.TextDecorations>
+                        <TextDecoration Location="Underline"/>
+                    </TextBlock.TextDecorations>
+                </TextBlock>
+                <TextBlock Grid.Row="1" x:Name="WaitingKitchen" Text="The kitchen is waiting for an order" Margin="10" Visibility="Visible"/>
+                <TextBlock Grid.Row="1" x:Name="OrderCooked" Margin="10,10,10,5" Visibility="Collapsed"/>
+                <TextBlock Grid.Row="2" x:Name="TimeLeft" Margin="10,5" Visibility="Collapsed"/>
+                <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="10,5"/>
+            </Grid>
             
-            <TextBlock Text="Kitchen" FontSize="15" Margin="5,0">
+            <TextBlock Text="Kitchen Messages" FontSize="15" Margin="5,0">
                 <TextBlock.TextDecorations>
                     <TextDecoration Location="Underline"/>
                 </TextBlock.TextDecorations>
             </TextBlock>
-            <TextBlock Grid.Row="1" x:Name="WaitingKitchen" Text="The kitchen is waiting for an order" Margin="10" Visibility="Visible"/>
-            <TextBlock Grid.Row="1" x:Name="OrderCooked" Margin="10,10,10,5" Visibility="Collapsed"/>
-            <TextBlock Grid.Row="2" x:Name="TimeLeft" Margin="10,5" Visibility="Collapsed"/>
-            <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="10,5"/>
-        </Grid>
+            <ListBox x:Name="KitchenMessages" Margin="10" SelectionMode="Single">
+                <ListBox.Items>
+                    <TextBlock Text="Pas de messages pour l'instant"/>
+                </ListBox.Items>
+            </ListBox>
+        </StackPanel>
+        
     </Grid>
 </Window>

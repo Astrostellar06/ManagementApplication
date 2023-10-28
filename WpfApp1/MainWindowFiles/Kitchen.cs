@@ -78,7 +78,24 @@ namespace WpfApp1
                 dots++;
                 if (dots > order.Length + 3)
                     dots = order.Length;
-                TimeLeft.Text = "Time left: " + timeLeft + " seconds";
+                String timeLeftString = "Time left: ";
+                if (timeLeft > 59)
+                {
+                    if (timeLeft / 60 > 1)
+                        timeLeftString += timeLeft / 60 + " minutes and " + timeLeft % 60 + " second";
+                    else
+                        timeLeftString += timeLeft / 60 + " minute and " + timeLeft % 60 + " second";
+                    if (timeLeft % 60 > 1)
+                        timeLeftString += "s";
+                }
+                else
+                {
+                    timeLeftString += timeLeft + " second";
+                    if (timeLeft > 1)
+                        timeLeftString += "s";
+                }
+
+                TimeLeft.Text = timeLeftString;
                 await Task.Delay(1000);
                 timeLeft--;
             }

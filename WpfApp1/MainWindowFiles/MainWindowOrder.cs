@@ -19,6 +19,7 @@ namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
+        public delegate void CookingDelegate();
         List<Pizza> pizzas = new List<Pizza>();
         List<Drink> drinks = new List<Drink>();
         public static List<Order> orders = new List<Order>();
@@ -101,7 +102,8 @@ namespace WpfApp1
                         
                         CurrentOrderList.Items.Add(formattedString);
                         
-                        Cooking();
+                        CookingDelegate cookingDelegate = Cooking;
+                        cookingDelegate();
                     }
                     else
                     {
@@ -133,7 +135,8 @@ namespace WpfApp1
                         
                         CurrentOrderList.Items.Add(formattedString);
                         
-                        Cooking();
+                        CookingDelegate cookingDelegate = Cooking;
+                        cookingDelegate();
                     }
                     else
                     {
