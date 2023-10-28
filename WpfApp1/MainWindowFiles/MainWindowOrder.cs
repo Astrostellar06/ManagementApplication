@@ -92,22 +92,30 @@ namespace WpfApp1
                 {
                     if (sender.Equals(PlaceOrderButton))
                     {
-                        MessageBox.Show(pizzas.Count.ToString());
                         orders.Add(new Order(new List<Pizza>(pizzas), listCustomers[customerIndex], listClerks[clerkIndex]));
-                        MessageBox.Show(orders[orders.Count-1].pizzas.Count.ToString());
-                        CurrentOrderList.Items.Add("Order #" + orders[orders.Count - 1].orderNumber + " - Price: " + orders[orders.Count - 1].calculateTotalPrice());
-                        MessageBox.Show("Your order has been placed.");
+                        listClerks[clerkIndex].numberOfOrders++;
+                        
+                        string originalStringLeft = "Order #" + orders[orders.Count - 1].orderNumber + " ";
+                        string originalStringRight = " Price: " + orders[orders.Count - 1].calculateTotalPrice() + "€";
+                        string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
+                        
+                        CurrentOrderList.Items.Add(formattedString);
                     }
                     else
                     {
-                        MessageBox.Show(pizzas.Count.ToString());
                         Order order = orders[CurrentOrderList.SelectedIndex];
+                        order.clerk.numberOfOrders--;
                         order.pizzas = new List<Pizza>(pizzas);
                         order.customer = listCustomers[customerIndex];
                         order.clerk = listClerks[clerkIndex];
                         orders[CurrentOrderList.SelectedIndex] = order;
-                        CurrentOrderList.Items[CurrentOrderList.SelectedIndex] = ("Order #" + order.orderNumber + " - Price: " + order.calculateTotalPrice());
-                        MessageBox.Show("Your order has been modified.");
+                        order.clerk.numberOfOrders++;
+                        
+                        string originalStringLeft = "Order #" + order.orderNumber + " ";
+                        string originalStringRight = " Price: " + order.calculateTotalPrice() + "€";
+                        string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
+
+                        CurrentOrderList.Items[CurrentOrderList.SelectedIndex] = formattedString;
                     }
                 }
                 else
@@ -115,23 +123,33 @@ namespace WpfApp1
                     if (sender.Equals(PlaceOrderButton))
                     {
                         orders.Add(new Order(new List<Pizza>(pizzas), new List<Drink>(drinks), listCustomers[customerIndex], listClerks[clerkIndex]));
-                        CurrentOrderList.Items.Add("Order #" + orders[orders.Count - 1].orderNumber + " - Price: " + orders[orders.Count - 1].calculateTotalPrice());
-                        MessageBox.Show("Your order has been placed.");
+                        listClerks[clerkIndex].numberOfOrders++;
+                        
+                        string originalStringLeft = "Order #" + orders[orders.Count - 1].orderNumber + " ";
+                        string originalStringRight = " Price: " + orders[orders.Count - 1].calculateTotalPrice() + "€";
+                        string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
+                        
+                        CurrentOrderList.Items.Add(formattedString);
                     }
                     else
                     {
                         Order order = orders[CurrentOrderList.SelectedIndex];
+                        order.clerk.numberOfOrders--;
                         order.pizzas = new List<Pizza>(pizzas);
                         order.drinks = new List<Drink>(drinks);
                         order.customer = listCustomers[customerIndex];
                         order.clerk = listClerks[clerkIndex];
                         orders[CurrentOrderList.SelectedIndex] = order;
-                        CurrentOrderList.Items[CurrentOrderList.SelectedIndex] = ("Order #" + order.orderNumber + " - Price: " + order.calculateTotalPrice());
-                        MessageBox.Show("Your order has been modified.");
+                        order.clerk.numberOfOrders++;
+                        
+                        string originalStringLeft = "Order #" + order.orderNumber + " ";
+                        string originalStringRight = " Price: " + order.calculateTotalPrice() + "€";
+                        string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
+
+                        CurrentOrderList.Items[CurrentOrderList.SelectedIndex] = formattedString;
                     }
                 }
                 Clear();
-                MessageBox.Show(orders[orders.Count-1].pizzas.Count.ToString());
             }
         }
 
@@ -147,10 +165,7 @@ namespace WpfApp1
                 LossButton1.Visibility = Visibility.Visible;
             }
             else if (sender.Equals(DeliveryOrderList))
-            {
                 LossButton2.Visibility = Visibility.Visible;
-            }
-
         }
 
         private void DeletePizzaClick(object sender, RoutedEventArgs e)
@@ -219,7 +234,6 @@ namespace WpfApp1
             {
                 Order order = orders[CurrentOrderList.SelectedIndex];
                 ModifyOrderButton.Visibility = Visibility.Visible;
-                MessageBox.Show(order.pizzas.Count.ToString());
                 for (int i = 0 ; i < order.pizzas.Count ; i++)
                 {
                     PizzaOrderList.Items.Add(order.pizzas[i].size + " " + order.pizzas[i].type);
@@ -262,7 +276,11 @@ namespace WpfApp1
                 DeliveryOrderList.Items.RemoveAt(DeliveryOrderList.SelectedIndex);
                 LossButton2.Visibility = Visibility.Collapsed;
             }
-            PastOrderList.Items.Add("Order #" + order.orderNumber + " - At loss");
+            string originalStringLeft = "Order #" + order.orderNumber + " ";
+            string originalStringRight = " At loss";
+            string formattedString = originalStringLeft.PadRight(37, '.') + originalStringRight.PadLeft(37,'.');
+
+            PastOrderList.Items.Add(formattedString);
             pastOrders.Add(order);
         }
     }

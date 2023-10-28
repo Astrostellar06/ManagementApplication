@@ -37,7 +37,7 @@ public class Order
         counter++;
     }
     
-    public string calculateTotalPrice()
+    public double calculateTotalPrice()
     {
         double totalPrice = 0;
         foreach (Pizza pizza in pizzas)
@@ -48,6 +48,6 @@ public class Order
         {
             totalPrice += drink.calculatePrice();
         }
-        return totalPrice.ToString();
+        return totalPrice;
     }
 }
