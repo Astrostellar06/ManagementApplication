@@ -41,7 +41,7 @@ namespace WpfApp1
                     PrepareOrderList.Items.Add(CurrentOrderList.Items[0]);
                     CurrentOrderList.Items.RemoveAt(0);
                     Console.WriteLine("Cooking order " + orderBeingPrepared.orderNumber);
-                    await Task.Delay(calculateTime(orderBeingPrepared) * 1000);
+                    await CookingDisplay(calculateTime(orderBeingPrepared));
                     Console.WriteLine("Order " + orderBeingPrepared.orderNumber + " is ready");
                     if (pastOrders.Contains(orderBeingPrepared))
                     {
@@ -58,6 +58,29 @@ namespace WpfApp1
                 PrepareOrderList.Visibility = Visibility.Collapsed;
                 LossButton0.Visibility = Visibility.Collapsed;
                 LossText.Visibility = Visibility.Collapsed;
+                WaitingKitchen.Visibility = Visibility.Visible;
+                OrderCooked.Visibility = Visibility.Collapsed;
+                TimeLeft.Visibility = Visibility.Collapsed;
+            }
+        }
+        
+        public async Task CookingDisplay(int time)
+        {
+            WaitingKitchen.Visibility = Visibility.Collapsed;
+            OrderCooked.Visibility = Visibility.Visible;
+            TimeLeft.Visibility = Visibility.Visible;
+            int timeLeft = time;
+            string order = "The kitchen is cooking the order " + orderBeingPrepared.orderNumber;
+            int dots = order.Length;
+            while (timeLeft > 0)
+            {
+                OrderCooked.Text = order.PadRight(dots, '.');
+                dots++;
+                if (dots > order.Length + 3)
+                    dots = order.Length;
+                TimeLeft.Text = "Time left: " + timeLeft + " seconds";
+                await Task.Delay(1000);
+                timeLeft--;
             }
         }
 

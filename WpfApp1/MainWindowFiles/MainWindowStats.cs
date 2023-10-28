@@ -37,7 +37,6 @@ namespace WpfApp1
                     listStats.Items.Add(formattedString);
                 }
             }
-            listStatsLabel.Visibility = Visibility.Visible;
             listStats.Visibility = Visibility.Visible;
         }
 
@@ -57,7 +56,6 @@ namespace WpfApp1
                     listStats.Items.Add(formattedString);
                 }
             }
-            listStatsLabel.Visibility = Visibility.Visible;
             listStats.Visibility = Visibility.Visible;
         }
 
@@ -92,7 +90,6 @@ namespace WpfApp1
 
                 AveragePrice.Text = "Average order price: " + String.Format("{0:0.00}", (totalPrice / (orders.Count + deliveryOrders.Count + pastOrders.Count + orderPlusOne))) + "€";
             }
-            listStatsLabel.Visibility = Visibility.Visible;
             AveragePrice.Visibility = Visibility.Visible;
         }
 
@@ -194,7 +191,6 @@ namespace WpfApp1
                     if (noOrders)
                         listStats.Items.Add("No orders in the database for this time period");
                 }
-                listStatsLabel.Visibility = Visibility.Visible;
                 listStats.Visibility = Visibility.Visible;
             }
             else
@@ -206,7 +202,7 @@ namespace WpfApp1
         private void ClearStats()
         {
             listStats.Items.Clear();
-            listStatsLabel.Visibility = Visibility.Collapsed;
+            listStatsLabel.Text = "No statisctics selected";
             listStats.Visibility = Visibility.Collapsed;
             AveragePrice.Visibility = Visibility.Collapsed;
             Calendar.Visibility = Visibility.Collapsed;
