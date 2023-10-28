@@ -19,7 +19,11 @@ namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
+        public Order orderBeingModified = null;
+        public bool remove1;
+        public bool remove2;
         public delegate void CookingDelegate();
+        public delegate void DelivererMessageDelegate(string msg);
         List<Pizza> pizzas = new List<Pizza>();
         List<Drink> drinks = new List<Drink>();
         public static List<Order> orders = new List<Order>();
@@ -94,16 +98,6 @@ namespace WpfApp1
                     if (sender.Equals(PlaceOrderButton))
                     {
                         orders.Add(new Order(new List<Pizza>(pizzas), listCustomers[customerIndex], listClerks[clerkIndex]));
-                        listClerks[clerkIndex].numberOfOrders++;
-                        
-                        string originalStringLeft = "Order #" + orders[orders.Count - 1].orderNumber + " ";
-                        string originalStringRight = " Price: " + orders[orders.Count - 1].calculateTotalPrice() + "€";
-                        string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
-                        
-                        CurrentOrderList.Items.Add(formattedString);
-                        
-                        CookingDelegate cookingDelegate = Cooking;
-                        cookingDelegate();
                     }
                     else
                     {
@@ -120,6 +114,11 @@ namespace WpfApp1
                         string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
 
                         CurrentOrderList.Items[CurrentOrderList.SelectedIndex] = formattedString;
+                        
+                        ClerkMessages.Items.Add(
+                            "Successfuly modified the order n°" + orders[orders.Count - 1].orderNumber);
+                        KitchenMessages.Items.Add("The order n°" + orders[orders.Count - 1].orderNumber +
+                                                  " was re-transmitted.");
                     }
                 }
                 else
@@ -127,16 +126,6 @@ namespace WpfApp1
                     if (sender.Equals(PlaceOrderButton))
                     {
                         orders.Add(new Order(new List<Pizza>(pizzas), new List<Drink>(drinks), listCustomers[customerIndex], listClerks[clerkIndex]));
-                        listClerks[clerkIndex].numberOfOrders++;
-                        
-                        string originalStringLeft = "Order #" + orders[orders.Count - 1].orderNumber + " ";
-                        string originalStringRight = " Price: " + orders[orders.Count - 1].calculateTotalPrice() + "€";
-                        string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
-                        
-                        CurrentOrderList.Items.Add(formattedString);
-                        
-                        CookingDelegate cookingDelegate = Cooking;
-                        cookingDelegate();
                     }
                     else
                     {
@@ -154,11 +143,60 @@ namespace WpfApp1
                         string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
 
                         CurrentOrderList.Items[CurrentOrderList.SelectedIndex] = formattedString;
+                        
+                        ClerkMessages.Items.Add(
+                            "Successfuly modified the order n°" + orders[orders.Count - 1].orderNumber);
+                        KitchenMessages.Items.Add("The order n°" + orders[orders.Count - 1].orderNumber +
+                                                  " was re-transmitted.");
                     }
+                }
+
+                if (sender.Equals(PlaceOrderButton))
+                {
+                    listClerks[clerkIndex].numberOfOrders++;
+                        
+                    string originalStringLeft = "Order #" + orders[orders.Count - 1].orderNumber + " ";
+                    string originalStringRight = " Price: " + orders[orders.Count - 1].calculateTotalPrice() + "€";
+                    string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
+                        
+                    CurrentOrderList.Items.Add(formattedString);
+
+                    if (!remove1)
+                    {
+                        KitchenMessages.Items.Clear();
+                        ClerkMessages.Items.Clear();
+                        CustomerMessages.Items.Clear();
+                        remove1 = true;
+                    }
+
+                    CustomerMessages.Items.Add("Your order n°" + orders[orders.Count - 1].orderNumber +
+                                               " was placed.");
+                    ClerkMessages.Items.Add(
+                        "Successfuly opened the order n°" + orders[orders.Count - 1].orderNumber);
+                    KitchenMessages.Items.Add("The order n°" + orders[orders.Count - 1].orderNumber +
+                                              " was transmitted.");
+
+                    DelivererMessageDelegate delivererMessageDelegate = SendDelivererMessage;
+                    delivererMessageDelegate("The order n°" + orders[orders.Count - 1].orderNumber + " was placed 5 minutes ago");
+                    CookingDelegate cookingDelegate = Cooking;
+                    cookingDelegate();
                 }
                 Clear();
             }
         }
+
+        private async void SendDelivererMessage(string msg)
+        {
+            await Task.Delay(10000);
+            DelivererMessages.SelectedIndex = 0;
+            if (!remove2)
+            {
+                DelivererMessages.Items.Clear();
+                remove2 = true;
+            }
+            DelivererMessages.Items.Add(msg);
+            DelivererMessages.SelectedIndex = -1;
+        } 
 
         private void SelectionChanged(object sender, RoutedEventArgs e)
         {
@@ -247,6 +285,7 @@ namespace WpfApp1
             LossButton2.Visibility = Visibility.Collapsed;
             LossButton0.Visibility = Visibility.Collapsed;
             LossText.Visibility = Visibility.Collapsed;
+            orderBeingModified = null;
         }
 
         private void AddOrder(object sender, RoutedEventArgs e)
@@ -255,25 +294,25 @@ namespace WpfApp1
             OrderPanel.Visibility = Visibility.Visible;
             if (sender.Equals(ModifyButton))
             {
-                Order order = orders[CurrentOrderList.SelectedIndex];
+                orderBeingModified = orders[CurrentOrderList.SelectedIndex];
                 ModifyOrderButton.Visibility = Visibility.Visible;
-                for (int i = 0 ; i < order.pizzas.Count ; i++)
+                for (int i = 0 ; i < orderBeingModified.pizzas.Count ; i++)
                 {
-                    PizzaOrderList.Items.Add(order.pizzas[i].size + " " + order.pizzas[i].type);
+                    PizzaOrderList.Items.Add(orderBeingModified.pizzas[i].size + " " + orderBeingModified.pizzas[i].type);
                     PizzaOrderList.Visibility = Visibility.Visible;
                     PizzaOrderListLabel.Visibility = Visibility.Visible;
                 }
-                for (int i = 0 ; i < order.drinks.Count ; i++)
+                for (int i = 0 ; i < orderBeingModified.drinks.Count ; i++)
                 {
-                    DrinkOrderList.Items.Add(order.drinks[i].volume + " of " + order.drinks[i].type);
+                    DrinkOrderList.Items.Add(orderBeingModified.drinks[i].volume + " of " + orderBeingModified.drinks[i].type);
                     DrinkOrderList.Visibility = Visibility.Visible;
                     DrinkOrderListLabel.Visibility = Visibility.Visible;
                 }
-                phoneOrder.Text = order.customer.phone;
-                orderClerk.Text = order.clerk.id.ToString();
-                pizzas = new List<Pizza>(order.pizzas);
-                if (order.drinks.Count > 0)
-                    drinks = new List<Drink>(order.drinks);
+                phoneOrder.Text = orderBeingModified.customer.phone;
+                orderClerk.Text = orderBeingModified.clerk.id.ToString();
+                pizzas = new List<Pizza>(orderBeingModified.pizzas);
+                if (orderBeingModified.drinks.Count > 0)
+                    drinks = new List<Drink>(orderBeingModified.drinks);
             }
             else
             {

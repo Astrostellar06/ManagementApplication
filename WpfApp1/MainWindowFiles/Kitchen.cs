@@ -28,7 +28,7 @@ namespace WpfApp1
         {
             if (!isBusy)
             {
-                while (orders.Count != 0)
+                while (orders.Count != 0 || (orders.Count > 1 && orderBeingModified != null))
                 {
                     PrepareOrder.Visibility = Visibility.Visible;
                     PrepareOrderList.Visibility = Visibility.Visible;
@@ -40,9 +40,9 @@ namespace WpfApp1
                     orders.Remove(orderBeingPrepared);
                     PrepareOrderList.Items.Add(CurrentOrderList.Items[0]);
                     CurrentOrderList.Items.RemoveAt(0);
-                    Console.WriteLine("Cooking order " + orderBeingPrepared.orderNumber);
+                    KitchenMessages.Items.Add("Cooking order " + orderBeingPrepared.orderNumber);
                     await CookingDisplay(calculateTime(orderBeingPrepared));
-                    Console.WriteLine("Order " + orderBeingPrepared.orderNumber + " is ready");
+                    KitchenMessages.Items.Add("Order " + orderBeingPrepared.orderNumber + " is ready");
                     if (pastOrders.Contains(orderBeingPrepared))
                     {
                         PastOrderList.Items.Add(PrepareOrderList.Items[0]);

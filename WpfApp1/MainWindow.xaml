@@ -460,7 +460,7 @@
                 <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="10,5"/>
             </Grid>
             
-            <TextBlock Text="Kitchen Messages" FontSize="15" Margin="5,0">
+            <TextBlock Text="Kitchen's Messages" FontSize="15" Margin="5,0">
                 <TextBlock.TextDecorations>
                     <TextDecoration Location="Underline"/>
                 </TextBlock.TextDecorations>
@@ -470,7 +470,36 @@
                     <TextBlock Text="Pas de messages pour l'instant"/>
                 </ListBox.Items>
             </ListBox>
+            <TextBlock Text="Clerks' Messages" FontSize="15" Margin="5,0">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <ListBox x:Name="ClerkMessages" Margin="10" SelectionMode="Single">
+                <ListBox.Items>
+                    <TextBlock Text="Pas de messages pour l'instant"/>
+                </ListBox.Items>
+            </ListBox>
+            <TextBlock Text="Deliverers' Messages" FontSize="15" Margin="5,0">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <ListBox x:Name="DelivererMessages" Margin="10" SelectionMode="Single">
+                <ListBox.Items>
+                    <TextBlock Text="Pas de messages pour l'instant"/>
+                </ListBox.Items>
+            </ListBox>
+            <TextBlock Text="Customers' Messages" FontSize="15" Margin="5,0">
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline"/>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+            <ListBox x:Name="CustomerMessages" Margin="10" SelectionMode="Single">
+                <ListBox.Items>
+                    <TextBlock Text="Pas de messages pour l'instant"/>
+                </ListBox.Items>
+            </ListBox>
         </StackPanel>
-        
     </Grid>
 </Window>
