@@ -18,7 +18,6 @@ using System.Text.RegularExpressions;
 
 namespace WpfApp1
 {
-
     public partial class MainWindow : Window
     {
         private bool isBusy;
@@ -43,8 +42,10 @@ namespace WpfApp1
                     PrepareOrderList.Items.Add(CurrentOrderList.Items[0]);
                     CurrentOrderList.Items.RemoveAt(0);
                     KitchenMessages.Items.Add("Cooking order " + orderBeingPrepared.orderNumber);
+                    checkMessages();
                     await CookingDisplay(calculateTime(orderBeingPrepared));
                     KitchenMessages.Items.Add("Order " + orderBeingPrepared.orderNumber + " is ready");
+                    checkMessages();
                     if (pastOrders.Contains(orderBeingPrepared))
                     {
                         PastOrderList.Items.Add(PrepareOrderList.Items[0]);
@@ -54,7 +55,6 @@ namespace WpfApp1
                         deliveryOrders.Add(orderBeingPrepared);
                         DeliveryOrderList.Items.Add(PrepareOrderList.Items[0]);
                     }
-                    checkMessages();
                 }
                 isBusy = false;
                 PrepareOrder.Visibility = Visibility.Collapsed;

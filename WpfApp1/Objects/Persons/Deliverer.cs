@@ -5,6 +5,7 @@ public class Deliverer : Person
     public int number { get; set; }
     private static int counter;
     public int numberOfOrders { get; set; }
+    public bool inDelivery;
     
     public Deliverer(string name, string surname)
     {

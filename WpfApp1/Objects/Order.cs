@@ -12,6 +12,7 @@ public class Order
     public DateTime orderDate { get; set; }
     public Customer customer { get; set; }
     public Clerk clerk { get; set; }
+    public bool isBeingDelivered;
     private static int counter;
     
     public Order(List<Pizza> pizzas, List<Drink> drinks, Customer customer, Clerk clerk)

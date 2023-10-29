@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Pizzeria Management Application" Height="1000" Width="1500">
+        Title="Pizzeria Management Application" Height="1000" Width="1800">
     <!-- Définition de la grille -->
     <Grid Margin="10">
         <Grid.RowDefinitions>

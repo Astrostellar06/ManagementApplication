@@ -169,15 +169,15 @@ namespace WpfApp1
                         remove1 = true;
                     }
 
-                    CustomerMessages.Items.Add("Your order n°" + orders[orders.Count - 1].orderNumber +
-                                               " was placed.");
+                    CustomerMessages.Items.Add("To customer " + orders[orders.Count - 1].customer.name + " - Your order n°" + orders[orders.Count - 1].orderNumber +
+                                               " has been placed.");
                     ClerkMessages.Items.Add(
-                        "Successfuly opened the order n°" + orders[orders.Count - 1].orderNumber);
+                        "To clerk n°" + orders[orders.Count - 1].clerk.id + " - Successfuly opened the order n°" + orders[orders.Count - 1].orderNumber);
                     KitchenMessages.Items.Add("The order n°" + orders[orders.Count - 1].orderNumber +
-                                              " was transmitted.");
+                                              " has been transmitted.");
 
                     DelivererMessageDelegate delivererMessageDelegate = SendDelivererMessage;
-                    delivererMessageDelegate("The order n°" + orders[orders.Count - 1].orderNumber + " was placed 5 minutes ago");
+                    delivererMessageDelegate("To all - The order n°" + orders[orders.Count - 1].orderNumber + " was placed 5 minutes ago");
                     CookingDelegate cookingDelegate = Cooking;
                     cookingDelegate();
                 }
