@@ -38,9 +38,7 @@ namespace WpfApp1
                     isBusy = true;
                     orderBeingPrepared = orders[0];
                     if (orderBeingModified == orderBeingPrepared)
-                    {
                         Clear();
-                    }
                     orders.Remove(orderBeingPrepared);
                     PrepareOrderList.Items.Add(CurrentOrderList.Items[0]);
                     CurrentOrderList.Items.RemoveAt(0);
@@ -56,6 +54,7 @@ namespace WpfApp1
                         deliveryOrders.Add(orderBeingPrepared);
                         DeliveryOrderList.Items.Add(PrepareOrderList.Items[0]);
                     }
+                    checkMessages();
                 }
                 isBusy = false;
                 PrepareOrder.Visibility = Visibility.Collapsed;

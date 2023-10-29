@@ -181,6 +181,7 @@ namespace WpfApp1
                     CookingDelegate cookingDelegate = Cooking;
                     cookingDelegate();
                 }
+                checkMessages();
                 Clear();
             }
         }
@@ -196,6 +197,7 @@ namespace WpfApp1
             }
             DelivererMessages.Items.Add(msg);
             DelivererMessages.SelectedIndex = -1;
+            checkMessages();
         } 
 
         private void SelectionChanged(object sender, RoutedEventArgs e)
@@ -364,6 +366,18 @@ namespace WpfApp1
                 PrepareOrderList.Items.Add(formattedString);
                 pastOrders.Add(order);
             }
+        }
+
+        public void checkMessages()
+        {
+            if (KitchenMessages.Items.Count == 11)
+                KitchenMessages.Items.RemoveAt(0);
+            if (ClerkMessages.Items.Count == 6)
+                ClerkMessages.Items.RemoveAt(0);
+            if (CustomerMessages.Items.Count == 6)
+                CustomerMessages.Items.RemoveAt(0);
+            if (DelivererMessages.Items.Count == 6)
+                DelivererMessages.Items.RemoveAt(0);
         }
     }
 }
