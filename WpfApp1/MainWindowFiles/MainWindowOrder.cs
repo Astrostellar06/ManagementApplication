@@ -19,7 +19,7 @@ namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        public Order orderBeingModified = null;
+        public Order orderBeingModified;
         public bool remove1;
         public bool remove2;
         public delegate void CookingDelegate();
@@ -285,7 +285,6 @@ namespace WpfApp1
             LossButton2.Visibility = Visibility.Collapsed;
             LossButton0.Visibility = Visibility.Collapsed;
             LossText.Visibility = Visibility.Collapsed;
-            orderBeingModified = null;
         }
 
         private void AddOrder(object sender, RoutedEventArgs e)

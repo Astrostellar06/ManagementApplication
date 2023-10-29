@@ -28,7 +28,7 @@ namespace WpfApp1
         {
             if (!isBusy)
             {
-                while (orders.Count != 0 || (orders.Count > 1 && orderBeingModified != null))
+                while (orders.Count != 0)
                 {
                     PrepareOrder.Visibility = Visibility.Visible;
                     PrepareOrderList.Visibility = Visibility.Visible;
@@ -37,6 +37,10 @@ namespace WpfApp1
                     LossText.Visibility = Visibility.Collapsed;
                     isBusy = true;
                     orderBeingPrepared = orders[0];
+                    if (orderBeingModified == orderBeingPrepared)
+                    {
+                        Clear();
+                    }
                     orders.Remove(orderBeingPrepared);
                     PrepareOrderList.Items.Add(CurrentOrderList.Items[0]);
                     CurrentOrderList.Items.RemoveAt(0);
