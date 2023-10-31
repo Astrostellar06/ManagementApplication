@@ -247,43 +247,58 @@
         
         <!--Orders Module-->
         
-        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="OrderListPanel" Margin="5">
-            <TextBlock Text="Order being prepared" x:Name="PrepareOrder" FontSize="15" Margin="5,0" Visibility="Collapsed">
-                <TextBlock.TextDecorations>
-                    <TextDecoration Location="Underline"/>
-                </TextBlock.TextDecorations>
-            </TextBlock>
-            <ListBox Margin="10" SelectionMode="Single" x:Name="PrepareOrderList" SelectionChanged="SelectionChanged" Visibility="Collapsed"/>
-            <Button Content="At loss" Width="200" BorderBrush="Red" Margin="0,15,0,25" x:Name="LossButton0" Click="LossOrder" Visibility="Collapsed"/>
-            <StackPanel x:Name="LossText" Margin="0,15,0,25" Visibility="Collapsed" HorizontalAlignment="Center">
-                <TextBlock Text="Order already lost, will be added to closed orders" Foreground="Red"/>
-                <TextBlock Text="when the kitchen is done preparing" Foreground="Red"/>
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="OrderListPanel" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        
+            <StackPanel Margin="5">
+                <TextBlock Text="List of orders in waiting" FontSize="15" Margin="5,0">
+                    <TextBlock.TextDecorations>
+                        <TextDecoration Location="Underline"/>
+                    </TextBlock.TextDecorations>
+                </TextBlock>
+                <ListBox Height="150" Margin="10" SelectionMode="Single" x:Name="CurrentOrderList" SelectionChanged="SelectionChanged"/>
+                <Button Content="Modify" Width="200" BorderBrush="Goldenrod" Margin="0,5" x:Name="ModifyButton" Click="AddOrder" Visibility="Collapsed"/>
+                <Button Content="At loss" Width="200" BorderBrush="Red" Margin="0,5" x:Name="LossButton1" Click="LossOrder" Visibility="Collapsed"/>
+                <Button Content="Add an order" Width="200" BorderBrush="LimeGreen" Margin="0,10,0,20" Click="AddOrder"/>
+                
+                <TextBlock Text="Order being prepared" x:Name="PrepareOrder" FontSize="15" Margin="5,0" Visibility="Collapsed">
+                    <TextBlock.TextDecorations>
+                        <TextDecoration Location="Underline"/>
+                    </TextBlock.TextDecorations>
+                </TextBlock>
+                <ListBox Margin="10" SelectionMode="Single" x:Name="PrepareOrderList" SelectionChanged="SelectionChanged" Visibility="Collapsed"/>
+                <Button Content="At loss" Width="200" BorderBrush="Red" Margin="0,15,0,25" x:Name="LossButton0" Click="LossOrder" Visibility="Collapsed"/>
+                <StackPanel x:Name="LossText" Margin="0,15,0,25" Visibility="Collapsed" HorizontalAlignment="Center">
+                    <TextBlock Text="Order already lost, will be added to closed orders" Foreground="Red"/>
+                    <TextBlock Text="when the kitchen is done preparing" Foreground="Red"/>
+                </StackPanel>
             </StackPanel>
-            <TextBlock Text="List of orders in waiting" FontSize="15" Margin="5,0">
-                <TextBlock.TextDecorations>
-                    <TextDecoration Location="Underline"/>
-                </TextBlock.TextDecorations>
-            </TextBlock>
-            <ListBox Height="150" Margin="10" SelectionMode="Single" x:Name="CurrentOrderList" SelectionChanged="SelectionChanged"/>
-            <Button Content="Modify" Width="200" BorderBrush="Goldenrod" Margin="0,5" x:Name="ModifyButton" Click="AddOrder" Visibility="Collapsed"/>
-            <Button Content="At loss" Width="200" BorderBrush="Red" Margin="0,5" x:Name="LossButton1" Click="LossOrder" Visibility="Collapsed"/>
-            <Button Content="Add an order" Width="200" BorderBrush="LimeGreen" Margin="0,10,0,30" Click="AddOrder"/>
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1" Margin="15,0"/>
             
-            <TextBlock Text="List of orders in delivery" FontSize="15" Margin="5,0">
-                <TextBlock.TextDecorations>
-                    <TextDecoration Location="Underline"/>
-                </TextBlock.TextDecorations>
-            </TextBlock>
-            <ListBox Height="150" Margin="10" SelectionMode="Single" x:Name="DeliveryOrderList" SelectionChanged="SelectionChanged"/>
-            <Button Content="At loss" Width="200" BorderBrush="Red" Margin="0,5" x:Name="LossButton2" Click="LossOrder" Visibility="Collapsed"/>
+            <StackPanel Margin="5" Grid.Row="1">
+                <TextBlock Text="List of orders in delivery" FontSize="15" Margin="5,0">
+                    <TextBlock.TextDecorations>
+                        <TextDecoration Location="Underline"/>
+                    </TextBlock.TextDecorations>
+                </TextBlock>
+                <ListBox Height="150" Margin="10" SelectionMode="Single" x:Name="DeliveryOrderList" SelectionChanged="SelectionChanged"/>
+                <Button Content="At loss" Width="200" BorderBrush="Red" Margin="0,5" x:Name="LossButton2" Click="LossOrder" Visibility="Collapsed"/>
+            </StackPanel>
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="15,0"/>
             
-            <TextBlock Text="List of closed orders" FontSize="15" Margin="5,15,5,0">
-                <TextBlock.TextDecorations>
-                    <TextDecoration Location="Underline"/>
-                </TextBlock.TextDecorations>
-            </TextBlock>
-            <ListBox Height="150" Margin="10" SelectionMode="Single" x:Name="PastOrderList" SelectionChanged="SelectionChanged"/>
-        </StackPanel>
+            <StackPanel Margin="5" Grid.Row="2">
+                <TextBlock Text="List of closed orders" FontSize="15" Margin="5,15,5,0">
+                    <TextBlock.TextDecorations>
+                        <TextDecoration Location="Underline"/>
+                    </TextBlock.TextDecorations>
+                </TextBlock>
+                <ListBox Height="150" Margin="10" SelectionMode="Single" x:Name="PastOrderList" SelectionChanged="SelectionChanged"/>
+            </StackPanel>
+        </Grid>
         
         <StackPanel Grid.Row="1" Grid.Column="1" x:Name="OrderPanel" Visibility="Collapsed">
             <TextBlock Text="Place an order" Margin="5,5,5,10" FontSize="15">

@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oXhhq72xJrMQubZiZBuQtuzTvg4phfV8R+MpNuD2dIEFhEhiU6K1iC8JSrX+c6V1ZyA5Tq+smHDUgcWAXPA1uw==",
+  "dgSpecHash": "j10Z+RuSmkWW19zyNdYOERVYVGF8b1fjjCrec6ud8ijHw/lr1ml17F6hc5s+trfH+yE4wiZfJ2/WrZVx2MajJg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\cleme\\OneDrive\\Documents\\Efrei\\M1\\Integration\\ManagementApplication\\WpfApp1\\WpfApp1.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\cleme\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.22\\microsoft.netcore.app.ref.6.0.22.nupkg.sha512",
-    "C:\\Users\\cleme\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.22\\microsoft.windowsdesktop.app.ref.6.0.22.nupkg.sha512",
-    "C:\\Users\\cleme\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.22\\microsoft.aspnetcore.app.ref.6.0.22.nupkg.sha512",
-    "C:\\Users\\cleme\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.22\\microsoft.netcore.app.host.win-x64.6.0.22.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\User\\Documents\\Efrei\\M1\\intégration de systèmes\\WpfApp1\\WpfApp1\\WpfApp1.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
