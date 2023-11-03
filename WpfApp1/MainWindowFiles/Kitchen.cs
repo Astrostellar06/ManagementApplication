@@ -65,6 +65,7 @@ namespace WpfApp1
                 WaitingKitchen.Visibility = Visibility.Visible;
                 OrderCooked.Visibility = Visibility.Collapsed;
                 TimeLeft.Visibility = Visibility.Collapsed;
+                PrepareOrderList.Items.Clear();
             }
         }
         

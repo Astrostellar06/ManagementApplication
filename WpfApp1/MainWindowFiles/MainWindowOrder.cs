@@ -386,6 +386,7 @@ namespace WpfApp1
                 string formattedString = originalStringLeft.PadRight(37, '.') + originalStringRight.PadLeft(37,'.');
                 CurrentDeliveryOrderList.Items[CurrentDeliveryOrderList.SelectedIndex] = formattedString;
                 pastOrders.Add(order);
+                currentDeliveryOrders.Remove(order);
             }
             else
             {

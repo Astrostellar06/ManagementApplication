@@ -316,8 +316,51 @@ namespace WpfApp1
         {
             if (lstCustomer.SelectedItem != null)
             {
-                listCustomers.RemoveAt(lstCustomer.SelectedIndex);
-                lstCustomer.Items.RemoveAt(lstCustomer.SelectedIndex);
+                bool allowedToDelete = true;
+                if (!(orders.Count + deliveryOrders.Count + currentDeliveryOrders.Count == 0 &&
+                    orderBeingPrepared == null))
+                {
+                    foreach (Order order in orders)
+                    {
+                        if (order.customer == listCustomers[lstCustomer.SelectedIndex])
+                        {
+                            allowedToDelete = false;
+                            break;
+                        }
+                    }
+
+                    foreach (Order order in deliveryOrders)
+                    {
+                        if (order.customer == listCustomers[lstCustomer.SelectedIndex])
+                        {
+                            allowedToDelete = false;
+                            break;
+                        }
+                    }
+
+                    foreach (Order order in currentDeliveryOrders)
+                    {
+                        if (order.customer == listCustomers[lstCustomer.SelectedIndex])
+                        {
+                            allowedToDelete = false;
+                            break;
+                        }
+                    }
+                    
+                    if (PrepareOrderList.Items.Count != 0)
+                        if (orderBeingPrepared.customer == listCustomers[lstCustomer.SelectedIndex])
+                            allowedToDelete = false;
+                }
+
+                if (allowedToDelete)
+                {
+                    listCustomers.RemoveAt(lstCustomer.SelectedIndex);
+                    lstCustomer.Items.RemoveAt(lstCustomer.SelectedIndex);
+                }
+                else
+                {
+                    MessageBox.Show("This customer has orders pending");
+                }
             }
         }
 
@@ -325,8 +368,50 @@ namespace WpfApp1
         {
             if (lstClerk.SelectedItem != null)
             {
-                listClerks.RemoveAt(lstClerk.SelectedIndex);
-                lstClerk.Items.RemoveAt(lstClerk.SelectedIndex);
+                bool allowedToDelete = true;
+                if (!(orders.Count + deliveryOrders.Count + currentDeliveryOrders.Count == 0))
+                {
+                    foreach (Order order in orders)
+                    {
+                        if (order.clerk == listClerks[lstClerk.SelectedIndex])
+                        {
+                            allowedToDelete = false;
+                            break;
+                        }
+                    }
+
+                    foreach (Order order in deliveryOrders)
+                    {
+                        if (order.clerk == listClerks[lstClerk.SelectedIndex])
+                        {
+                            allowedToDelete = false;
+                            break;
+                        }
+                    }
+
+                    foreach (Order order in currentDeliveryOrders)
+                    {
+                        if (order.clerk == listClerks[lstClerk.SelectedIndex])
+                        {
+                            allowedToDelete = false;
+                            break;
+                        }
+                    }                    
+
+                    if (PrepareOrderList.Items.Count != 0)
+                        if (orderBeingPrepared.clerk == listClerks[lstClerk.SelectedIndex])
+                            allowedToDelete = false;
+                }
+                
+                if (allowedToDelete)
+                {
+                    listClerks.RemoveAt(lstClerk.SelectedIndex);
+                    lstClerk.Items.RemoveAt(lstClerk.SelectedIndex); 
+                }
+                else
+                {
+                    MessageBox.Show("This clerk has orders pending");
+                }
             }
         }
 
@@ -334,6 +419,11 @@ namespace WpfApp1
         {
             if (lstDeliverer.SelectedItem != null)
             {
+                if (listDeliverers[lstDeliverer.SelectedIndex].inDelivery)
+                {
+                    MessageBox.Show("This deliverer is currently delivering an order");
+                    return;
+                }
                 listDeliverers.RemoveAt(lstDeliverer.SelectedIndex);
                 lstDeliverer.Items.RemoveAt(lstDeliverer.SelectedIndex);
             }

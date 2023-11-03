@@ -47,12 +47,14 @@ namespace WpfApp1
                 DelivererMessages.Items.Add("To Deliverer n°" + currentDeliverer.number + " - Picked up order #" + currentDeliveryOrders[0].orderNumber);
                 checkMessages();
                 Random random = new Random();
-                await Task.Delay(random.Next(15, 50) * 1000);
-                ClerkMessages.Items.Add("To Clerk n°" + currentOrder.clerk.id + " - The Adress of Order #" + currentOrder.orderNumber + " was found");
+                await Task.Delay(random.Next(10, 15) * 1000);
+                if (!pastOrders.Contains(currentOrder))
+                    ClerkMessages.Items.Add("To Clerk n°" + currentOrder.clerk.id + " - The Adress of Order #" + currentOrder.orderNumber + " was found");
                 checkMessages();
-                await Task.Delay(random.Next(15, 50) * 1000);
-                DelivererMessages.Items.Add("To Deliverer n°" + currentDeliverer.number + " - Order #" + currentOrder.orderNumber + " delivered - You got paid " + ((currentDeliveryOrders[0].calculateTotalPrice())/10).ToString("0.00") + "€");
-                ClerkMessages.Items.Add("To Clerk n°" + currentOrder.clerk.id + " - Order #" + currentOrder.orderNumber + " delivered - Order closed");
+                await Task.Delay(random.Next(10, 15) * 1000);
+                DelivererMessages.Items.Add("To Deliverer n°" + currentDeliverer.number + " - Order #" + currentOrder.orderNumber + " delivered - You got paid " + ((currentOrder.calculateTotalPrice())/10).ToString("0.00") + "€");
+                if (!pastOrders.Contains(currentOrder))
+                    ClerkMessages.Items.Add("To Clerk n°" + currentOrder.clerk.id + " - Order #" + currentOrder.orderNumber + " delivered - Order closed");
                 checkMessages();
                 currentDeliverer.numberOfOrders++;
                 currentDeliverer.inDelivery = false;
@@ -62,8 +64,11 @@ namespace WpfApp1
                     {
                         if (!pastOrders.Contains(currentOrder))
                         {
+                            Console.Write(currentDeliveryOrders.Count);
+                            Console.Write("hellol");
                             pastOrders.Add(currentOrder);
                             currentDeliveryOrders.Remove(currentOrder);
+                            Console.Write(currentDeliveryOrders.Count);
                         }
                         PastOrderList.Items.Add(CurrentDeliveryOrderList.Items[i]);
                         CurrentDeliveryOrderList.Items.RemoveAt(i); ;

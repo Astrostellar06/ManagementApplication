@@ -63,7 +63,7 @@ namespace WpfApp1
         {
             ClearStats();
             listStatsLabel.Text = "Average order price";
-            if (orders.Count + deliveryOrders.Count + pastOrders.Count == 0 && orderBeingPrepared == null)
+            if (orders.Count + deliveryOrders.Count + pastOrders.Count + currentDeliveryOrders.Count == 0 && orderBeingPrepared == null)
                 AveragePrice.Text = "No orders in the database";
             else
             {
@@ -78,6 +78,11 @@ namespace WpfApp1
                     totalPrice += order.calculateTotalPrice();
                 }
                 foreach (Order order in pastOrders)
+                {
+                    totalPrice += order.calculateTotalPrice();
+                }
+
+                foreach (Order order in currentDeliveryOrders)
                 {
                     totalPrice += order.calculateTotalPrice();
                 }
