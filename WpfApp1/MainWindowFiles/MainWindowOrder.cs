@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
 
 namespace WpfApp1
 {
@@ -413,6 +414,52 @@ namespace WpfApp1
                 CustomerMessages.Items.RemoveAt(0);
             if (DelivererMessages.Items.Count == 6)
                 DelivererMessages.Items.RemoveAt(0);
+        }
+
+        public void BrowseButton(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+    
+            openFileDialog.Filter = "*.txt|*.txt";
+            
+            
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedFilePath = openFileDialog.FileName;
+                string[] lines = System.IO.File.ReadAllLines(selectedFilePath);
+                phoneOrder.Text = lines[0];
+                orderClerk.Text = lines[1];
+                for (int i = 2 ; i < lines.Length ; i++)
+                {
+                    if (lines[i].Contains("Pizza"))
+                    {
+                        string[] pizza = lines[i].Split(' ');
+                        PizzaOrderList.Items.Add(pizza[1] + " " + pizza[2]);
+                        PizzaOrderList.Visibility = Visibility.Visible;
+                        PizzaOrderListLabel.Visibility = Visibility.Visible;
+                        ComboBoxItem selectedPizza = (ComboBoxItem)PizzaList.Items[0];
+                        ComboBoxItem selectedPizzaSize = (ComboBoxItem)PizzaSizeList.Items[0];
+                        Pizza.Size size = (Pizza.Size)Enum.Parse(typeof(Pizza.Size), pizza[1]);
+                        Pizza.Type type = (Pizza.Type)Enum.Parse(typeof(Pizza.Type), pizza[2]);
+                        Pizza pizza1 = new Pizza(size, type);
+                        pizzas.Add(pizza1);
+                    }
+                    else if (lines[i].Contains("Drink"))
+                    {
+                        string[] drink = lines[i].Split(' ');
+                        DrinkOrderList.Items.Add(drink[1] + " of " + drink[3]);
+                        DrinkOrderList.Visibility = Visibility.Visible;
+                        DrinkOrderListLabel.Visibility = Visibility.Visible;
+                        ComboBoxItem selectedDrink = (ComboBoxItem)DrinkList.Items[0];
+                        ComboBoxItem selectedDrinkSize = (ComboBoxItem)DrinkSizeList.Items[0];
+                        Drink.Type type = (Drink.Type)Enum.Parse(typeof(Drink.Type), drink[3]);
+                        Drink.Size size = (Drink.Size)Enum.Parse(typeof(Drink.Size), drink[1]);
+                        Drink drink1 = new Drink(type, size);
+                        drinks.Add(drink1);
+                    }
+                }
+            }
+            
         }
     }
 }
