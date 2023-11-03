@@ -442,6 +442,7 @@
             <Button Content="Deliveries by deliverer" Width="200" Margin="0,5" Click="OrdersByDeliverer"/>
             <Button Content="Average order price" Width="200" Margin="0,5" Click="AverageOrderPrice"/>
             <Button Content="Order by time period" Width="200" Margin="0,5" Click="OrdersByTime"/>
+            <Button Content="Average Accounts Receivable" Width="200" Margin="0,5" Click="AverageAccounts"/>
             <StackPanel x:Name="Calendar" Margin="30,20" Visibility="Collapsed">
                 <TextBlock x:Name="CalendarText">
                     <TextBlock.TextDecorations>

@@ -174,6 +174,17 @@ namespace WpfApp1
                             listStats.Items.Add(formattedString);
                         }
                     }
+                    foreach (Order order in currentDeliveryOrders)
+                    {
+                        if (order.orderDate >= startDate && order.orderDate <= endDate)
+                        {
+                            noOrders = false;
+                            string originalStringLeft = "Order number: " + order.orderNumber + " ";
+                            string originalStringRight = " Order date: " + order.orderDate.ToShortDateString();
+                            string formattedString = originalStringLeft.PadRight(25, '.') + originalStringRight.PadLeft(25, '.');
+                            listStats.Items.Add(formattedString);
+                        }
+                    }
                     foreach (Order order in pastOrders)
                     {
                         if (order.orderDate >= startDate && order.orderDate <= endDate)
@@ -200,7 +211,72 @@ namespace WpfApp1
             }
             else
             {
-                MessageBox.Show("Aucune date sélectionnée.");
+                MessageBox.Show("No date selected.");
+            }
+        }
+
+        public void AverageAccounts(object sender, RoutedEventArgs e)
+        {
+            listStatsLabel.Text = "Average Accounts Receivable Over the Past Month";
+            DateTime endDate = DateTime.Today;
+            startDate = endDate.AddDays(-30);
+            if (orders.Count + deliveryOrders.Count + pastOrders.Count == 0 && orderBeingPrepared == null)
+                listStats.Items.Add("No orders in the database");
+            else
+            {
+                bool noOrders = true;
+                double totalPrice = 0;
+                foreach (Order order in orders)
+                {
+                    if (order.orderDate >= startDate && order.orderDate <= endDate)
+                    {
+                        noOrders = false;
+                        totalPrice += order.calculateTotalPrice();
+                    }
+                }
+
+                foreach (Order order in deliveryOrders)
+                {
+                    if (order.orderDate >= startDate && order.orderDate <= endDate)
+                    {
+                        noOrders = false;
+                        totalPrice += order.calculateTotalPrice();
+                    }
+                }
+
+                foreach (Order order in currentDeliveryOrders)
+                {
+                    if (order.orderDate >= startDate && order.orderDate <= endDate)
+                    {
+                        noOrders = false;
+                        totalPrice += order.calculateTotalPrice();
+                    }
+                }
+
+                foreach (Order order in pastOrders)
+                {
+                    if (order.orderDate >= startDate && order.orderDate <= endDate)
+                    {
+                        noOrders = false;
+                        totalPrice += order.calculateTotalPrice();
+                    }
+                }
+
+                if (!pastOrders.Contains(orderBeingPrepared) && !deliveryOrders.Contains(orderBeingPrepared) &&
+                    orderBeingPrepared != null && orderBeingPrepared.orderDate >= startDate &&
+                    orderBeingPrepared.orderDate <= endDate)
+                {
+                    noOrders = false;
+                    totalPrice += orderBeingPrepared.calculateTotalPrice();
+                }
+
+                if (noOrders)
+                    listStats.Items.Add("No orders in the database for this time period");
+                else
+                {
+                    listStats.Items.Add("Average accounts receivable: " + String.Format("{0:0.00}", (totalPrice / 30)) + "€");
+                    listStats.Visibility = Visibility.Visible;
+                }
             }
         }
         
