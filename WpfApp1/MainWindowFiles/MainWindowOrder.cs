@@ -28,6 +28,7 @@ namespace WpfApp1
         List<Drink> drinks = new List<Drink>();
         public static List<Order> orders = new List<Order>();
         public static List<Order> deliveryOrders = new List<Order>();
+        public static List<Order> currentDeliveryOrders = new List<Order>();
         public static List<Order> pastOrders = new List<Order>();
         
         private void AddPizza(object sender, RoutedEventArgs e)
@@ -103,11 +104,13 @@ namespace WpfApp1
                     {
                         Order order = orders[CurrentOrderList.SelectedIndex];
                         order.clerk.numberOfOrders--;
+                        order.customer.numberOfOrder--;
                         order.pizzas = new List<Pizza>(pizzas);
                         order.customer = listCustomers[customerIndex];
                         order.clerk = listClerks[clerkIndex];
                         orders[CurrentOrderList.SelectedIndex] = order;
                         order.clerk.numberOfOrders++;
+                        order.customer.numberOfOrder++;
                         
                         string originalStringLeft = "Order #" + order.orderNumber + " ";
                         string originalStringRight = " Price: " + order.calculateTotalPrice() + "€";
@@ -131,12 +134,14 @@ namespace WpfApp1
                     {
                         Order order = orders[CurrentOrderList.SelectedIndex];
                         order.clerk.numberOfOrders--;
+                        order.customer.numberOfOrder--;
                         order.pizzas = new List<Pizza>(pizzas);
                         order.drinks = new List<Drink>(drinks);
                         order.customer = listCustomers[customerIndex];
                         order.clerk = listClerks[clerkIndex];
                         orders[CurrentOrderList.SelectedIndex] = order;
                         order.clerk.numberOfOrders++;
+                        order.customer.numberOfOrder++;
                         
                         string originalStringLeft = "Order #" + order.orderNumber + " ";
                         string originalStringRight = " Price: " + order.calculateTotalPrice() + "€";
@@ -154,6 +159,7 @@ namespace WpfApp1
                 if (sender.Equals(PlaceOrderButton))
                 {
                     listClerks[clerkIndex].numberOfOrders++;
+                    listCustomers[customerIndex].numberOfOrder++;
                         
                     string originalStringLeft = "Order #" + orders[orders.Count - 1].orderNumber + " ";
                     string originalStringRight = " Price: " + orders[orders.Count - 1].calculateTotalPrice() + "€";
@@ -224,6 +230,21 @@ namespace WpfApp1
                     LossButton0.Visibility = Visibility.Visible;
                 }
             }
+            else if (sender.Equals(CurrentDeliveryOrderList))
+            {
+                if (CurrentDeliveryOrderList.SelectedIndex == -1)
+                    return;
+                if (pastOrders.Contains(currentDeliveryOrders[CurrentDeliveryOrderList.SelectedIndex]))
+                {
+                    LossButton3.Visibility = Visibility.Collapsed;
+                    LossText2.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    LossButton3.Visibility = Visibility.Visible;
+                    LossText2.Visibility = Visibility.Collapsed;
+                }
+            }
         }
 
         private void DeletePizzaClick(object sender, RoutedEventArgs e)
@@ -278,6 +299,7 @@ namespace WpfApp1
             DeliveryOrderList.SelectedIndex = -1;
             PrepareOrderList.SelectedIndex = -1;
             PastOrderList.SelectedIndex = -1;
+            CurrentDeliveryOrderList.SelectedIndex = -1;
             DeletePizza.Visibility = Visibility.Collapsed;
             DeleteDrink.Visibility = Visibility.Collapsed;
             ModifyOrderButton.Visibility = Visibility.Collapsed;
@@ -287,6 +309,8 @@ namespace WpfApp1
             LossButton2.Visibility = Visibility.Collapsed;
             LossButton0.Visibility = Visibility.Collapsed;
             LossText.Visibility = Visibility.Collapsed;
+            LossButton3.Visibility = Visibility.Collapsed;
+            LossText2.Visibility = Visibility.Collapsed;
         }
 
         private void AddOrder(object sender, RoutedEventArgs e)
@@ -339,7 +363,7 @@ namespace WpfApp1
                 PastOrderList.Items.Add(formattedString);
                 pastOrders.Add(order);
             }
-            else if(sender.Equals(LossButton2))
+            else if (sender.Equals(LossButton2))
             {
                 order = deliveryOrders[DeliveryOrderList.SelectedIndex];
                 deliveryOrders.RemoveAt(DeliveryOrderList.SelectedIndex);
@@ -351,6 +375,16 @@ namespace WpfApp1
                 string formattedString = originalStringLeft.PadRight(37, '.') + originalStringRight.PadLeft(37,'.');
                 
                 PastOrderList.Items.Add(formattedString);
+                pastOrders.Add(order);
+            }
+            else if (sender.Equals(LossButton3))
+            {
+                LossButton3.Visibility = Visibility.Collapsed;
+                order = currentDeliveryOrders[CurrentDeliveryOrderList.SelectedIndex];
+                string originalStringLeft = "Order #" + order.orderNumber + " ";
+                string originalStringRight = " At loss";
+                string formattedString = originalStringLeft.PadRight(37, '.') + originalStringRight.PadLeft(37,'.');
+                CurrentDeliveryOrderList.Items[CurrentDeliveryOrderList.SelectedIndex] = formattedString;
                 pastOrders.Add(order);
             }
             else

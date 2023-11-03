@@ -197,6 +197,7 @@ namespace WpfApp1
                 {
                     listDeliverers.Add(new Deliverer(name.Text, surname.Text));
                     lstDeliverer.Items.Add(name.Text + " " + surname.Text);
+                    Deliver();
                 }
 
                 clear();
@@ -452,7 +453,7 @@ namespace WpfApp1
 
         private void OrderByOrder(object sender, RoutedEventArgs e)
         {
-            listCustomers.Sort((x, y) => x.numberOfOrder.CompareTo(y.numberOfOrder));
+            listCustomers.Sort((x, y) => y.numberOfOrder.CompareTo(x.numberOfOrder));
             lstCustomer.Items.Clear();
             foreach (Customer customer in listCustomers)
             {

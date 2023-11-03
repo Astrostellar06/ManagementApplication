@@ -54,6 +54,7 @@ namespace WpfApp1
                     {
                         deliveryOrders.Add(orderBeingPrepared);
                         DeliveryOrderList.Items.Add(PrepareOrderList.Items[0]);
+                        Deliver();
                     }
                 }
                 isBusy = false;
