@@ -235,7 +235,7 @@
                         <TextBlock Background="{StaticResource Theme1}" Foreground="{StaticResource Theme2}" x:Name="NameInfo" Margin="5"/>
                         <TextBlock Background="{StaticResource Theme1}" Foreground="{StaticResource Theme2}" Grid.Column="1" x:Name="SurnameInfo" Margin="5"/>
                         <TextBlock Background="{StaticResource Theme1}" Foreground="{StaticResource Theme2}" Grid.Row="1" Grid.ColumnSpan="2" x:Name="PhoneInfo" Margin="5"/>
-                        <TextBlock Background="{StaticResource Theme1}" Foreground="{StaticResource Theme2}" Grid.Row="1" x:Name="IdInfo" Margin="5"/>
+                        <TextBlock Background="{StaticResource Theme1}" Foreground="{StaticResource Theme2}" Grid.Row="1" x:Name="IdInfo" Margin="5" Visibility="Collapsed"/>
                         <TextBlock Background="{StaticResource Theme1}" Foreground="{StaticResource Theme2}" Grid.Row="2" x:Name="FirstOrderInfo" Margin="5"/>
                         <TextBlock Background="{StaticResource Theme1}" Foreground="{StaticResource Theme2}" Grid.Row="2" Grid.Column="1" x:Name="NumOrderInfo" Margin="5"/>
                         <TextBlock Background="{StaticResource Theme1}" Foreground="{StaticResource Theme2}" Grid.Row="3" Text="Address Info:" Margin="5" Visibility="Collapsed" x:Name="AddressInfo">

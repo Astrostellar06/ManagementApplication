@@ -217,6 +217,7 @@ namespace WpfApp1
                 Modify1.Visibility = Visibility.Visible;
                 Delete1.Visibility = Visibility.Visible;
                 InfoPanel.Visibility = Visibility.Visible;
+                IdInfo.Visibility = Visibility.Collapsed;
                 NameInfo.Text = "Name: " + customer.name;
                 SurnameInfo.Text = "Surname: " + customer.surname;
                 PhoneInfo.Text = "Phone: " + customer.phone;
@@ -228,7 +229,7 @@ namespace WpfApp1
                 NumberInfo.Text = "Number: " + customer.address.number;
                 if (customer.address.floor != 0)
                     FloorInfo.Text = "Floor: " + customer.address.floor;
-                if (customer.address.apartment != "")
+                if (customer.address.apartment != null)
                     ApartmentInfo.Text = "Apartment: " + customer.address.apartment;
             }
             else if (lstClerk.SelectedItem == null && lstDeliverer.SelectedItem == null)
@@ -258,6 +259,7 @@ namespace WpfApp1
                 Modify2.Visibility = Visibility.Visible;
                 Delete2.Visibility = Visibility.Visible;
                 InfoPanel.Visibility = Visibility.Visible;
+                IdInfo.Visibility = Visibility.Visible;
                 NameInfo.Text = "Name: " + clerk.name;
                 SurnameInfo.Text = "Surname: " + clerk.surname;
                 IdInfo.Text = "ID: " + clerk.id;
@@ -289,6 +291,7 @@ namespace WpfApp1
                 Modify3.Visibility = Visibility.Visible;
                 Delete3.Visibility = Visibility.Visible;
                 InfoPanel.Visibility = Visibility.Visible;
+                IdInfo.Visibility = Visibility.Visible;
                 NameInfo.Text = "Name: " + deliverer.name;
                 SurnameInfo.Text = "Surname: " + deliverer.surname;
                 IdInfo.Text = "Deliverer's number: " + deliverer.number;

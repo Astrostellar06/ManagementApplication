@@ -13,7 +13,7 @@ public class Order
     public Customer? customer { get; set; }
     public Clerk? clerk { get; set; }
     public bool isBeingDelivered;
-    private static int counter;
+    public static int counterOrder;
 
     public Order()
     {
@@ -23,23 +23,23 @@ public class Order
     {
         this.pizzas = pizzas;
         this.drinks = drinks;
-        orderNumber = counter;
+        orderNumber = counterOrder;
         orderTime = DateTime.Now;
         orderDate = DateTime.Today;
         this.customer = customer;
         this.clerk = clerk;
-        counter++;
+        counterOrder++;
     }
     
     public Order(List<Pizza> pizzas, Customer customer, Clerk clerk)
     {
         this.pizzas = pizzas;
-        orderNumber = counter;
+        orderNumber = counterOrder;
         orderTime = DateTime.Now;
         orderDate = DateTime.Today;
         this.customer = customer;
         this.clerk = clerk;
-        counter++;
+        counterOrder++;
     }
     
     public double calculateTotalPrice()

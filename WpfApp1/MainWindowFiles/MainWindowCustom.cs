@@ -84,6 +84,9 @@ namespace WpfApp1
                     string formattedString = originalStringLeft.PadRight(35, '.') + originalStringRight.PadLeft(35,'.');
                     CurrentOrderList.Items.Add(formattedString);
                 }
+                Order.counterOrder = orders.Count;
+                Deliverer.counterDeliverer = listDeliverers.Count;
+                Clerk.counterClerk = listClerks.Count;
                 Cooking();
                 MessageBox.Show("File loaded successfuly: " + selectedFilePath);
             }

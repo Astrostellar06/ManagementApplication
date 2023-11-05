@@ -3,7 +3,7 @@
 public class Deliverer : Person
 {
     public int number { get; set; }
-    private static int counter;
+    public static int counterDeliverer;
     public int numberOfOrders { get; set; }
     public bool inDelivery;
     
@@ -11,8 +11,8 @@ public class Deliverer : Person
     {
         this.name = name;
         this.surname = surname;
-        number = counter;
-        counter++;
+        number = counterDeliverer;
+        counterDeliverer++;
         numberOfOrders = 0;
     }
 }
