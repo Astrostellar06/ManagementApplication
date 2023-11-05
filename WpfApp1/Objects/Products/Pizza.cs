@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace WpfApp1;
+﻿namespace WpfApp1;
 
 public class Pizza : Products
 {

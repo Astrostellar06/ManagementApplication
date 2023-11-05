@@ -5,15 +5,19 @@ namespace WpfApp1;
 
 public class Order
 {
-    public List<Pizza> pizzas { get; set; }
+    public List<Pizza>? pizzas { get; set; }
     public List<Drink> drinks { get; set; } = new List<Drink>();
     public int orderNumber { get; set; }
     public DateTime orderTime { get; set; }
     public DateTime orderDate { get; set; }
-    public Customer customer { get; set; }
-    public Clerk clerk { get; set; }
+    public Customer? customer { get; set; }
+    public Clerk? clerk { get; set; }
     public bool isBeingDelivered;
     private static int counter;
+
+    public Order()
+    {
+    }
     
     public Order(List<Pizza> pizzas, List<Drink> drinks, Customer customer, Clerk clerk)
     {

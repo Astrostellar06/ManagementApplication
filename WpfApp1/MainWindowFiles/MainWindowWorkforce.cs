@@ -1,22 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Text.RegularExpressions;
 
 namespace WpfApp1
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         List<Customer> listCustomers = new List<Customer>();
         List<Clerk> listClerks = new List<Clerk>();
@@ -318,7 +307,7 @@ namespace WpfApp1
             {
                 bool allowedToDelete = true;
                 if (!(orders.Count + deliveryOrders.Count + currentDeliveryOrders.Count == 0 &&
-                    orderBeingPrepared == null))
+                    !isBusy))
                 {
                     foreach (Order order in orders)
                     {
@@ -369,7 +358,8 @@ namespace WpfApp1
             if (lstClerk.SelectedItem != null)
             {
                 bool allowedToDelete = true;
-                if (!(orders.Count + deliveryOrders.Count + currentDeliveryOrders.Count == 0))
+                if (!(orders.Count + deliveryOrders.Count + currentDeliveryOrders.Count == 0 &&
+                      !isBusy))
                 {
                     foreach (Order order in orders)
                     {

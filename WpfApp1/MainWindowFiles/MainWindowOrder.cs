@@ -1,24 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Text.RegularExpressions;
 using Microsoft.Win32;
 
 namespace WpfApp1
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public Order orderBeingModified;
         public bool remove1;
@@ -419,9 +408,7 @@ namespace WpfApp1
         public void BrowseButton(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-    
-            openFileDialog.Filter = "*.txt|*.txt";
-            
+            openFileDialog.Filter = "Text Files (*.txt)|*.txt";
             
             if (openFileDialog.ShowDialog() == true)
             {
@@ -437,8 +424,6 @@ namespace WpfApp1
                         PizzaOrderList.Items.Add(pizza[1] + " " + pizza[2]);
                         PizzaOrderList.Visibility = Visibility.Visible;
                         PizzaOrderListLabel.Visibility = Visibility.Visible;
-                        ComboBoxItem selectedPizza = (ComboBoxItem)PizzaList.Items[0];
-                        ComboBoxItem selectedPizzaSize = (ComboBoxItem)PizzaSizeList.Items[0];
                         Pizza.Size size = (Pizza.Size)Enum.Parse(typeof(Pizza.Size), pizza[1]);
                         Pizza.Type type = (Pizza.Type)Enum.Parse(typeof(Pizza.Type), pizza[2]);
                         Pizza pizza1 = new Pizza(size, type);
@@ -450,8 +435,6 @@ namespace WpfApp1
                         DrinkOrderList.Items.Add(drink[1] + " of " + drink[3]);
                         DrinkOrderList.Visibility = Visibility.Visible;
                         DrinkOrderListLabel.Visibility = Visibility.Visible;
-                        ComboBoxItem selectedDrink = (ComboBoxItem)DrinkList.Items[0];
-                        ComboBoxItem selectedDrinkSize = (ComboBoxItem)DrinkSizeList.Items[0];
                         Drink.Type type = (Drink.Type)Enum.Parse(typeof(Drink.Type), drink[3]);
                         Drink.Size size = (Drink.Size)Enum.Parse(typeof(Drink.Size), drink[1]);
                         Drink drink1 = new Drink(type, size);

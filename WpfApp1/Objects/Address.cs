@@ -3,11 +3,16 @@
 public class Address
 {
     public int postalCode { get; set; }
-    public string city { get; set; }
-    public string street { get; set; }
+    public string? city { get; set; }
+    public string? street { get; set; }
     public int number { get; set; }
     public int floor { get; set; }
-    public string apartment { get; set; } = "";
+    public string? apartment { get; set; }
+
+    public Address()
+    {
+    }
+    
     
     public Address(int postalCode, string city, string street, int number)
     {
